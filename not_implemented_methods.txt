@@ -1,0 +1,13 @@
+operations:
+
+Task#7:
+long sumConversion(){
+}
+
+
+To class "Metering System":
+Task#15:
+void balanceTracking(){
+}
+
+Taskes#15-17 are not emplemented!!!
