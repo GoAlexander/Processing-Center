@@ -1,11 +1,28 @@
 
 public class FrontOffice {
-	
-	long commissionComputing(){
-		return 0;
+	//structures
+	Sum() { //TODO why mistake???
+		double sum;
+		int type_of_money; //TODO договориться какая валюта - какой номер (в документацию)
+	}
+	UserDataBase() {
+		int pin;
+		long deadline_of_card;
+		Sum oper_sum;
+		boolean stop_listl; //0 -> in the stop list
+		//TODO что-то ещё?
 	}
 	
-	//transactionControl begin	//добавить эти методы в однин метод?
+	
+	Sum commissionComputing(Sum oper_sum, int type_of_commission){
+		return oper_sum;
+	}
+	Sum sumConversion(/*double commission,*/ Sum oper_sum) { // TODO HIGH PRIORITY или вообще ничего на вход не нужно?
+		
+	}
+	
+	//methods
+	//transactionControl begin	//TODO HIGH PRIORITY  добавить эти методы в один метод?
 	boolean pinChecking(){
 		return true;
 	}
