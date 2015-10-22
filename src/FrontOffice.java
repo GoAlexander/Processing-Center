@@ -14,6 +14,7 @@ public class FrontOffice {
 	}
 	
 	
+	//methods
 	Sum commissionComputing(Sum oper_sum, int type_of_commission){
 		return oper_sum;
 	}
@@ -21,7 +22,6 @@ public class FrontOffice {
 		
 	}
 	
-	//methods
 	//transactionControl begin	//TODO HIGH PRIORITY  добавить эти методы в один метод?
 	boolean pinChecking(){
 		return true;
