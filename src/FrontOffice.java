@@ -12,6 +12,9 @@ public class FrontOffice {
 		boolean stop_listl; //0 -> in the stop list
 		//TODO что-то ещё?
 	}
+	Bond() {
+		//TODO (жду ответа преподавателя) описать какие будут деньги
+	}
 	
 	
 	//methods
@@ -23,22 +26,31 @@ public class FrontOffice {
 	}
 	
 	//transactionControl begin	//TODO HIGH PRIORITY  добавить эти методы в один метод?
-	boolean pinChecking(){
-		return true;
+	boolean transactionControl(UserDataBase  user_data)
+	{
+		boolean pinChecking(){ //TODO why mistake???
+			return true;
+		}
+		boolean usefulTimeOfCardChecking(){
+			return true;
+		}
+		boolean moneyOnCardCheckin(){
+			return true;
+		}
+		boolean cardInStoplistChecking(){
+			return true;
+		}
+		//Больше проверок??? (методов)
+	
+		if( pinChecking()==1 && usefulTimeOfCardChecking()==1 && moneyOnCardCheckin()==1 && cardInStoplistChecking()==1 )
+			return 1;
+		else
+			return 0;
+		
 	}
-	boolean usefulTimeOfCardChecking(){
-		return true;
-	}
-	boolean moneyOnCardCheckin(){
-		return true;
-	}
-	boolean cardInStoplistChecking(){
-		return true;
-	}
-	//Больше проверок???
 	//transactionControl end
 	
-	void bondSelection(){	//int or Mystruct???
+	Bond bondSelection(Bond bonds_sum){	//int or Mystruct???
 	}
 	
 	
