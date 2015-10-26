@@ -1,13 +1,13 @@
 
 public class ATMInterface {
 	//structures
-	Answer() { //TODO why mistake??? //TODO Make it
+	class Answer { //TODO Make it
 		
 	}
-	Bonds() { //TODO why mistake??? //TODO Make it
+	class Bonds { //TODO Make it
 		
 	}
-	Sum() { //TODO why mistake???
+	class Sum {
 		double sum;
 		int type_of_money; //TODO договориться какая валюта - какой номер (в документацию)
 	}
@@ -23,9 +23,11 @@ public class ATMInterface {
 	}
 	Sum sumOfOperationInput(Sum oper_sum){
 		System.out.println("Method <sumOfOperationInput> is not implemented yet.");
+		return oper_sum;
 	}
-	Bonds payment(Bonds bonnds_sum, Bonds bonds_sum_changing){
+	Bonds payment(Bonds bonds_sum, Bonds bonds_sum_changing){
 		System.out.println("Method <payment> is not implemented yet.");
+		return bonds_sum;
 	}
 	String checkPrinting(String check){
 		System.out.println("Method <checkPrinting> is not implemented yet.");

@@ -1,18 +1,19 @@
 
 public class FrontOffice {
-	//structures
-	Sum() { //TODO why mistake???
+	//structures 
+	//TODO правильно я сделал подобие структуры?
+	class Sum { 
 		double sum;
 		int type_of_money; //TODO договориться какая валюта - какой номер (в документацию)
 	}
-	UserDataBase() {
+	class UserDataBase {
 		int pin;
 		long deadline_of_card;
 		Sum oper_sum;
 		boolean stop_listl; //0 -> in the stop list
 		//TODO что-то ещё?
 	}
-	Bond() {
+	class Bond {
 		//TODO (жду ответа преподавателя) описать какие будут деньги
 	}
 	
@@ -22,10 +23,9 @@ public class FrontOffice {
 		return oper_sum;
 	}
 	Sum sumConversion(/*double commission,*/ Sum oper_sum) { // TODO HIGH PRIORITY или вообще ничего на вход не нужно?
-		
+		return oper_sum; //см. преподаватель писал об этом (Email)
 	}
 	
-	//transactionControl begin	//TODO HIGH PRIORITY  добавить эти методы в один метод?
 	boolean transactionControl(UserDataBase  user_data)
 	{
 		boolean pinChecking(){ //TODO why mistake???
@@ -41,18 +41,18 @@ public class FrontOffice {
 			return true;
 		}
 		//Больше проверок??? (методов)
-	
+
 		if( pinChecking()==1 && usefulTimeOfCardChecking()==1 && moneyOnCardCheckin()==1 && cardInStoplistChecking()==1 )
-			return 1;
+		{
+			return true;
+		}
 		else
-			return 0;
-		
+			return false;
 	}
-	//transactionControl end
 	
 	Bond bondSelection(Bond bonds_sum){	//int or Mystruct???
+		return bonds_sum;
 	}
-	
 	
 	//void???
 	void authorizationExportFoToBoOff(){
