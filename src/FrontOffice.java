@@ -16,6 +16,13 @@ public class FrontOffice {
 	class Bond {
 		//TODO (жду ответа преподавателя) описать какие будут деньги
 	}
+	class TransactionJournal {
+		long transaction_number;
+		int kind_of_transaction; //(1-покупка, 2- выдача наличных, 3-электронная коммерция, ...(?))
+		int  type_of_transaction; //(1-авторизация, 2-реверсал (отмена транзакции))
+		//? long time; //с датой и временем
+		//... TODO (см. там не всё понятно)
+	}
 	
 	
 	//methods
