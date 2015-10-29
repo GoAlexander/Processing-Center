@@ -1,4 +1,6 @@
 
+//Класс для интерфейса платежного терминала
+//(task #2+3)
 public class TerminalInterface {
 
 	void dataCardInput(){

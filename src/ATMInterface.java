@@ -1,4 +1,6 @@
 
+//Класс для интерфейса банкомата
+//task #4+5
 public class ATMInterface {
 	//structures
 	class Answer { //TODO Make it

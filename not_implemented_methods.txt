@@ -1,9 +1,6 @@
 operations:
 
-Task#7:
-long sumConversion(){
-}
-
+Task#12 (not enough information!)
 
 To class "Metering System":
 Task#15:

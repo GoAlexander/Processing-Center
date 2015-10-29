@@ -1,4 +1,5 @@
 
+//Класс для интерфейса сайта (task#1
 public class WebsiteInterface {
 
 	void authorizationRequest() {
