@@ -34,9 +34,9 @@ public class main {
 			}
 			else if (menu==5) {
 				System.out.println("Вы уверены, что хотите выйти из программы? (д/н)");
-				String menu2 = new String((String) in.next()); //протестировать
+				String menu2 = new String((String) in.next());
 				if (menu2.equals("д"))
-					break; //через exit?
+					System.exit(0);
 				//if (menu2.equals("н"))	
 			}
 			else
