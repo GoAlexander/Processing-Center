@@ -7,7 +7,7 @@ public class Terminal {
 
 	public Terminal(InterfClass a) {
 
-		card.cardNum = a.someCard.cardNum;
+		card.number = a.someCard.number;
 		triesLimit = 3;
 		nextOperation = true;
 		commitAnOperation = true;
