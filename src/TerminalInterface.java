@@ -1,5 +1,6 @@
+//не интерфейс, а сама программа
 public class Terminal {
-	private Card card;
+	private Cards card;
 	private int sum;
 	private int triesLimit;
 	private boolean nextOperation;
@@ -58,7 +59,7 @@ public class Terminal {
 	
 	private boolean checkIfNotInTheStopList(){
 		if (commitAnOperation == true);
-		//	проверка по базе
+		//card.BL=false;//проверка по базе
 		return false;
 	}
 
