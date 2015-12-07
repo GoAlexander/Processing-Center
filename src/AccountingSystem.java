@@ -18,6 +18,7 @@ public class AccountingSystem {
 	public void removeCard(String number) throws SQLException {
 		java.sql.Statement myStm = myConn.createStatement();
 		String sql = "delete from accountingdatabase.database where id=" + number;
+		myStm.executeUpdate(sql);
 	}
 	
 	public double getBalance(String number) throws SQLException{
@@ -37,6 +38,7 @@ public class AccountingSystem {
 		java.sql.Statement myStm = myConn.createStatement();
 		Double balance = new Double(value);
 		String sql = "update accountingdatabase.database " + " set balance='" + balance.toString() + "' where id=" + number;
+		myStm.executeUpdate(sql);
 	}
 
 	public double restatementOfBalances(String number, double transaction) throws SQLException{
