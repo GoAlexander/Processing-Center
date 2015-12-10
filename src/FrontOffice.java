@@ -218,11 +218,17 @@ public class FrontOffice {
 		int j = curr.denomination.length - 1;
 		int tempSum, count;
 		do {
+			/* finds which denomination is closest to sum and how many notes we need 
+			then removes the first digit of the number and does it again */
+
+			// removes the first digit of the number
 			tempSum = sum % curr.denomination[j];
 			if (tempSum >= curr.denomination[0] || tempSum == 0) {
+				// takes the first digit of the number
 				count = sum / curr.denomination[j];
 				sum = tempSum;
 			} else {
+				// takes the first digit of the number and reduces it by one
 				count = sum / curr.denomination[j] - 1;
 				sum = tempSum + curr.denomination[j];
 			}
@@ -230,6 +236,8 @@ public class FrontOffice {
 			--j;
 		} while (sum > 0);
 
+
+		// checks if there are enough notes and substitutes denominations with lower ones
 		for (j = curr.denomination.length - 1; j >= 0; j--) {
 			while (curr.quantity[j] < curr.result[j]) {
 				if (j == 6) {
@@ -260,6 +268,7 @@ public class FrontOffice {
 					throw new Exception();
 			}
 		}
+		// reduces the quantity of notes in cassettes
 		for (j = curr.denomination.length - 1; j >= 0; j--)
 			curr.quantity[j] = curr.quantity[j] - curr.result[j];
 		return curr;
