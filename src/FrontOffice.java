@@ -23,7 +23,23 @@ public class FrontOffice {
 	
 	//Купюры
 	class Bond {
-		//TODO (жду ответа преподавателя) описать какие будут деньги
+		Bond() {
+		}
+
+		// denomination of notes in cassettes
+		int[] denomination = { 1, 10, 50, 100, 500, 1000, 5000 };
+		// number of notes in cassettes
+		int[] quantity = { 5000, 1000, 500, 500, 500, 500, 500 };
+		// previous result of bonds` selection
+		int[] result = new int[denomination.length];
+
+		@Override
+		public String toString() {
+			String s = new String();
+			for (int j = denomination.length - 1; j >= 0; j--)
+				s = s + ("Denomination:" + denomination[j] + "; result: " + result[j] + '\n');
+			return s;
+		}
 	}
 	
 	//Журнал транзакций
@@ -197,9 +213,56 @@ public class FrontOffice {
 	}
 	//Transaction control. End.
 	
-	//Подбор купюр для выдачи (task #9)
-	Bond bondSelection(Bond bonds_sum){
-		return bonds_sum;
+	//Подбор купюр для выдачи
+	public static Bond bondSelection(Bond curr, int sum) throws Exception {
+		int j = curr.denomination.length - 1;
+		int tempSum, count;
+		do {
+			tempSum = sum % curr.denomination[j];
+			if (tempSum >= curr.denomination[0] || tempSum == 0) {
+				count = sum / curr.denomination[j];
+				sum = tempSum;
+			} else {
+				count = sum / curr.denomination[j] - 1;
+				sum = tempSum + curr.denomination[j];
+			}
+			curr.result[j] = count;
+			--j;
+		} while (sum > 0);
+
+		for (j = curr.denomination.length - 1; j >= 0; j--) {
+			while (curr.quantity[j] < curr.result[j]) {
+				if (j == 6) {
+					curr.result[j]--;
+					curr.result[j - 1] = curr.result[j - 1] + 5;
+				}
+				if (j == 5) {
+					curr.result[j]--;
+					curr.result[j - 1] = curr.result[j - 1] + 2;
+				}
+				if (j == 4) {
+					curr.result[j]--;
+					curr.result[j - 1] = curr.result[j - 1] + 5;
+				}
+				if (j == 3) {
+					curr.result[j]--;
+					curr.result[j - 1] = curr.result[j - 1] + 2;
+				}
+				if (j == 2) {
+					curr.result[j]--;
+					curr.result[j - 1] = curr.result[j - 1] + 5;
+				}
+				if (j == 1) {
+					curr.result[j]--;
+					curr.result[j - 1] = curr.result[j - 1] + 10;
+				}
+				if (j == 0)
+					throw new Exception();
+			}
+		}
+		for (j = curr.denomination.length - 1; j >= 0; j--)
+			curr.quantity[j] = curr.quantity[j] - curr.result[j];
+		return curr;
 	}
 	
 	
