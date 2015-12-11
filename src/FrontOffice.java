@@ -67,8 +67,8 @@ public class FrontOffice {
 	//true -> означает, что метод выполнен успешно, всё правильно
 	public static SimpleDateFormat data = new SimpleDateFormat("yyyy/MM/dd");
 
-	int findRowUser(String numCard) throws IOException {
-		FileInputStream fis = new FileInputStream("C:/Users/Артём/Desktop/test.xls");
+	public static int findRowUser(String numCard) throws IOException {
+		FileInputStream fis = new FileInputStream("C:/Processing-Center/excel/DB.xls");
 		Workbook wb = new HSSFWorkbook(fis);
 		int row = 0;
 		for (int i = 0;; i++) {
@@ -81,8 +81,8 @@ public class FrontOffice {
 		return row;
 	}
 
-	int findColUser(String phrase) throws IOException {
-		FileInputStream fis = new FileInputStream("C:/Users/Артём/Desktop/test.xls");
+	public static int findColUser(String phrase) throws IOException {
+		FileInputStream fis = new FileInputStream("C:/Processing-Center/excel/DB.xls");
 		Workbook wb = new HSSFWorkbook(fis);
 		int col = 0;
 		for (int i = 0;; i++) {
@@ -95,44 +95,51 @@ public class FrontOffice {
 		return col;
 	}
 
-	boolean pinChecking() throws IOException {
-		UserDataBase user = new UserDataBase();
-		FileInputStream fis = new FileInputStream("C:/Users/Артём/Desktop/test.xls");
-		Workbook wb = new HSSFWorkbook(fis);
-		int row = findRowUser(user.numCard);
-		int col = findColUser("Пин код");
-		if (user.pinCode.equals(getCellText(wb.getSheetAt(0).getRow(row).getCell(col)))) {
-			fis.close();
-			return true;
-		} else {
-			fis.close();
+	public static boolean pinChecking(String numCard, String pinCode) throws IOException {
+		try {
+			FileInputStream fis = new FileInputStream("C:/Processing-Center/excel/DB.xls");
+			Workbook wb = new HSSFWorkbook(fis);
+			int row = findRowUser(numCard);
+			int col = findColUser("Пин код");
+			if (pinCode.equals(getCellText(wb.getSheetAt(0).getRow(row).getCell(col)))) {
+				fis.close();
+				return true;
+			} else {
+				fis.close();
+				return false;
+			}
+		} catch (NullPointerException e) {
 			return false;
 		}
 	}
 
-	boolean usefulTimeOfCardChecking() throws IOException {
-		UserDataBase user = new UserDataBase();
-		FileInputStream fis = new FileInputStream("C:/Users/Артём/Desktop/test.xls");
-		Workbook wb = new HSSFWorkbook(fis);
-		int row = findRowUser(user.numCard);
-		int col = findColUser("Срок карты");
-		Date d = new Date();
-		String factData = getCellText(wb.getSheetAt(0).getRow(row).getCell(col));
-		String currData = data.format(d);
-		String factDataArr[] = factData.split("/");
-		String currDataArr[] = currData.split("/");
-		if ((Integer.valueOf(currDataArr[0]).compareTo(Integer.valueOf(factDataArr[0])) == -1)) {
-			fis.close();
-			return true;
-		} else if (Integer.valueOf(currDataArr[0]).compareTo(Integer.valueOf(factDataArr[0])) == 0) {
-			if (Integer.valueOf(currDataArr[1]).compareTo(Integer.valueOf(factDataArr[1])) == -1) {
+	public static boolean usefulTimeOfCardChecking(String numCard) throws IOException {
+		try {
+			FileInputStream fis = new FileInputStream("C:/Processing-Center/excel/DB.xls");
+			Workbook wb = new HSSFWorkbook(fis);
+			int row = findRowUser(numCard);
+			int col = findColUser("Срок карты");
+			Date d = new Date();
+			String factData = getCellText(wb.getSheetAt(0).getRow(row).getCell(col));
+			String currData = data.format(d);
+			String factDataArr[] = factData.split("/");
+			String currDataArr[] = currData.split("/");
+			if ((Integer.valueOf(currDataArr[0]).compareTo(Integer.valueOf(factDataArr[0])) == -1)) {
 				fis.close();
 				return true;
-			} else if (Integer.valueOf(currDataArr[1]).compareTo(Integer.valueOf(factDataArr[1])) == 0) {
-				if ((Integer.valueOf(currDataArr[2]).compareTo(Integer.valueOf(factDataArr[2])) == -1)
-						|| (Integer.valueOf(currDataArr[2]).compareTo(Integer.valueOf(factDataArr[2])) == 0)) {
+			} else if (Integer.valueOf(currDataArr[0]).compareTo(Integer.valueOf(factDataArr[0])) == 0) {
+				if (Integer.valueOf(currDataArr[1]).compareTo(Integer.valueOf(factDataArr[1])) == -1) {
 					fis.close();
 					return true;
+				} else if (Integer.valueOf(currDataArr[1]).compareTo(Integer.valueOf(factDataArr[1])) == 0) {
+					if ((Integer.valueOf(currDataArr[2]).compareTo(Integer.valueOf(factDataArr[2])) == -1)
+							|| (Integer.valueOf(currDataArr[2]).compareTo(Integer.valueOf(factDataArr[2])) == 0)) {
+						fis.close();
+						return true;
+					} else {
+						fis.close();
+						return false;
+					}
 				} else {
 					fis.close();
 					return false;
@@ -141,40 +148,45 @@ public class FrontOffice {
 				fis.close();
 				return false;
 			}
-		} else {
-			fis.close();
+		} catch (NullPointerException e) {
 			return false;
 		}
 	}
 
-	boolean moneyOnCardChecking() throws IOException {
-		UserDataBase user = new UserDataBase();
-		FileInputStream fis = new FileInputStream("C:/Users/Артём/Desktop/test.xls");
-		Workbook wb = new HSSFWorkbook(fis);
-		int row = findRowUser(user.numCard);
-		int col = findColUser("Остаток");
-		Integer desSum = Integer.valueOf(user.desireSum);
-		Integer factSum = (int) wb.getSheetAt(0).getRow(row).getCell(col).getNumericCellValue();
-		if ((desSum.compareTo(factSum) == -1) || (desSum.compareTo(factSum) == 0)) {
-			fis.close();
-			return true;
-		} else {
-			fis.close();
+	public static boolean moneyOnCardChecking(String numCard, String desireSum) throws IOException {
+		try {
+			FileInputStream fis = new FileInputStream("C:/Processing-Center/excel/DB.xls");
+			Workbook wb = new HSSFWorkbook(fis);
+			int row = findRowUser(numCard);
+			int col = findColUser("Остаток");
+			Integer desSum = Integer.valueOf(desireSum);
+			Integer factSum = (int) wb.getSheetAt(0).getRow(row).getCell(col).getNumericCellValue();
+			if ((desSum.compareTo(factSum) == -1) || (desSum.compareTo(factSum) == 0)) {
+				fis.close();
+				return true;
+			} else {
+				fis.close();
+				return false;
+			}
+		} catch (NullPointerException e) {
 			return false;
 		}
 	}
 
-	boolean cardInStoplistChecking() throws IOException {
-		UserDataBase user = new UserDataBase();
-		FileInputStream fis = new FileInputStream("C:/Users/Артём/Desktop/test.xls");
-		Workbook wb = new HSSFWorkbook(fis);
-		int row = findRowUser(user.numCard);
-		int col = findColUser("Стоп лист");
-		if ((int) wb.getSheetAt(0).getRow(row).getCell(col).getNumericCellValue() == 0) {
-			fis.close();
-			return true;
-		} else {
-			fis.close();
+	public static boolean cardInStoplistChecking(String numCard) throws IOException {
+		try {
+			FileInputStream fis = new FileInputStream("C:/Processing-Center/excel/DB.xls");
+			Workbook wb = new HSSFWorkbook(fis);
+			int row = findRowUser(numCard);
+			int col = findColUser("Стоп лист");
+			if ((int) wb.getSheetAt(0).getRow(row).getCell(col).getNumericCellValue() == 0) {
+				fis.close();
+				return true;
+			} else {
+				fis.close();
+				return false;
+			}
+		} catch (NullPointerException e) {
 			return false;
 		}
 	}
@@ -204,9 +216,9 @@ public class FrontOffice {
 		return result;
 	}
 
-	boolean transactionControl() throws IOException {
-		if ((pinChecking() == true) && (usefulTimeOfCardChecking() == true) && (moneyOnCardChecking() == true)
-				&& (cardInStoplistChecking() == true)) {
+	public static boolean transactionControl(String numCard, String pinCode, String desireSum) throws IOException {
+		if ((pinChecking(numCard, pinCode) == true) && (usefulTimeOfCardChecking(numCard) == true) && (moneyOnCardChecking(numCard, desireSum) == true)
+				&& (cardInStoplistChecking(numCard) == true)) {
 			return true;
 		} else
 			return false;
