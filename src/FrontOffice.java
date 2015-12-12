@@ -173,12 +173,18 @@ public class FrontOffice {
 		}
 	}
 
-	public static boolean cardInStoplistChecking(String numCard) throws IOException {
+	public static boolean cardInStoplistChecking(String numCard, String device) throws IOException {//device:terminal or atm
 		try {
 			FileInputStream fis = new FileInputStream("C:/Processing-Center/excel/DB.xls");
 			Workbook wb = new HSSFWorkbook(fis);
 			int row = findRowUser(numCard);
-			int col = findColUser("Стоп лист");
+			int col = 0;
+			if(device.equals("terminal"))
+				col = findColUser("Стоп-лист (терминал)");
+			else if(device.equals("atm"))
+				col = findColUser("Стоп-лист (банкомат)");
+			else
+				return false;
 			if ((int) wb.getSheetAt(0).getRow(row).getCell(col).getNumericCellValue() == 0) {
 				fis.close();
 				return true;
@@ -216,9 +222,9 @@ public class FrontOffice {
 		return result;
 	}
 
-	public static boolean transactionControl(String numCard, String pinCode, String desireSum) throws IOException {
+	public static boolean transactionControl(String numCard, String pinCode, String desireSum, String device) throws IOException {
 		if ((pinChecking(numCard, pinCode) == true) && (usefulTimeOfCardChecking(numCard) == true) && (moneyOnCardChecking(numCard, desireSum) == true)
-				&& (cardInStoplistChecking(numCard) == true)) {
+				&& (cardInStoplistChecking(numCard, device) == true)) {
 			return true;
 		} else
 			return false;
