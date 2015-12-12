@@ -32,6 +32,8 @@ import java.awt.SystemColor;
 import java.awt.Window;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+
+
 public class ATMInterface {
 	// structures
 	class Answer { // TODO Make it
