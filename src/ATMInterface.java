@@ -66,14 +66,13 @@ public class ATMInterface {
 		return pin;
 	}
 
-	Sum sumOfOperationInput(Sum oper_sum) {
+	FrontOffice.Sum sumOfOperationInput(FrontOffice.Sum oper_sum){
 		System.out.println("Method <sumOfOperationInput> is not implemented yet.");
 		return oper_sum;
 	}
-
-	Bonds payment(Bonds bonds_sum, Bonds bonds_sum_changing) {
+	FrontOffice.Bond payment(int sum, FrontOffice.Bond bonds_sum_changing){
 		System.out.println("Method <payment> is not implemented yet.");
-		return bonds_sum;
+		return bonds_sum_changing;
 	}
 
 	String checkPrinting(String check) {

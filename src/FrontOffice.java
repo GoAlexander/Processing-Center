@@ -22,22 +22,24 @@ public class FrontOffice {
 	}
 	
 	//Купюры
-	class Bond {
-		Bond() {
+	static class Bond {
+		public Bond() {
 		}
 
 		// denomination of notes in cassettes
-		int[] denomination = { 1, 10, 50, 100, 500, 1000, 5000 };
+		final int[] denomination = { 10, 50, 100, 500, 1000, 5000 };
 		// number of notes in cassettes
-		int[] quantity = { 5000, 1000, 500, 500, 500, 500, 500 };
+		int[] quantity = { 500, 500, 500, 500, 500, 500 };
 		// previous result of bonds` selection
 		int[] result = new int[denomination.length];
+		// codes of bonds in ATM
+		final int[] code = { 6, 5, 4, 3, 2, 1 };
 
 		@Override
 		public String toString() {
 			String s = new String();
 			for (int j = denomination.length - 1; j >= 0; j--)
-				s = s + ("Denomination:" + denomination[j] + "; result: " + result[j] + '\n');
+				s = s + ("Code " + code[j] + "; denomination:" + denomination[j] + "; result: " + result[j] + '\n');
 			return s;
 		}
 	}
@@ -229,15 +231,31 @@ public class FrontOffice {
 		} else
 			return false;
 	}
+
+	public static String answerMessage(String numCard, String pinCode, String desireSum, String device) throws IOException {
+		String s = new String();
+		if (transactionControl(numCard, pinCode, desireSum, device) == true)
+			return "Authorization completed. ";
+		if (pinChecking(numCard, pinCode) == false)
+			return "Wrong pin code. ";
+		if (usefulTimeOfCardChecking(numCard) == false)
+			s = s + "Your card expired. ";
+		if (moneyOnCardChecking(numCard, desireSum) == false)
+			s = s + "Not enough money on card. ";
+		if (cardInStoplistChecking(numCard, device) == false)
+			s = s + "Your card is in the stoplist. ";
+		return s;
+	}
 	//Transaction control. End.
 	
 	//Подбор купюр для выдачи
 	public static Bond bondSelection(Bond curr, int sum) throws Exception {
+		if (sum % 10 != 0)
+			throw new Exception();
 		int j = curr.denomination.length - 1;
 		int tempSum, count;
 		do {
-			/* finds which denomination is closest to sum and how many notes we need 
-			then removes the first digit of the number and does it again */
+			/* find which note is closest to sum */
 
 			// removes the first digit of the number
 			tempSum = sum % curr.denomination[j];
@@ -254,33 +272,28 @@ public class FrontOffice {
 			--j;
 		} while (sum > 0);
 
-
-		// checks if there are enough notes and substitutes denominations with lower ones
+		// checks if there are enough notes and substitutes them for lower ones
 		for (j = curr.denomination.length - 1; j >= 0; j--) {
 			while (curr.quantity[j] < curr.result[j]) {
-				if (j == 6) {
-					curr.result[j]--;
-					curr.result[j - 1] = curr.result[j - 1] + 5;
-				}
 				if (j == 5) {
 					curr.result[j]--;
-					curr.result[j - 1] = curr.result[j - 1] + 2;
+					curr.result[j - 1] = curr.result[j - 1] + 5;
 				}
 				if (j == 4) {
 					curr.result[j]--;
-					curr.result[j - 1] = curr.result[j - 1] + 5;
+					curr.result[j - 1] = curr.result[j - 1] + 2;
 				}
 				if (j == 3) {
 					curr.result[j]--;
-					curr.result[j - 1] = curr.result[j - 1] + 2;
+					curr.result[j - 1] = curr.result[j - 1] + 5;
 				}
 				if (j == 2) {
 					curr.result[j]--;
-					curr.result[j - 1] = curr.result[j - 1] + 5;
+					curr.result[j - 1] = curr.result[j - 1] + 2;
 				}
 				if (j == 1) {
 					curr.result[j]--;
-					curr.result[j - 1] = curr.result[j - 1] + 10;
+					curr.result[j - 1] = curr.result[j - 1] + 5;
 				}
 				if (j == 0)
 					throw new Exception();
