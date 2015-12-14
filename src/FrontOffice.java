@@ -224,25 +224,30 @@ public class FrontOffice {
 		return result;
 	}
 
-	public static boolean transactionControl(String numCard, String pinCode, String desireSum, String device) throws IOException {
-		if ((pinChecking(numCard, pinCode) == true) && (usefulTimeOfCardChecking(numCard) == true) && (moneyOnCardChecking(numCard, desireSum) == true)
-				&& (cardInStoplistChecking(numCard, device) == true)) {
-			return true;
-		} else
-			return false;
+	public static int transactionControl(String numCard, String pinCode, String desireSum, String device) throws IOException {
+		if (pinChecking(numCard, pinCode) == false)
+			return 0;
+		if (usefulTimeOfCardChecking(numCard) == false) 
+			return -1;
+		if (moneyOnCardChecking(numCard, desireSum) == false)
+			return -2;
+		if (cardInStoplistChecking(numCard, device) == false)
+			return -3;
+		return 1;
 	}
-
+	
 	public static String answerMessage(String numCard, String pinCode, String desireSum, String device) throws IOException {
 		String s = new String();
-		if (transactionControl(numCard, pinCode, desireSum, device) == true)
+		int a = transactionControl(numCard, pinCode, desireSum, device);
+		if (a == 1)
 			return "Authorization completed. ";
-		if (pinChecking(numCard, pinCode) == false)
+		if (a == 0)
 			return "Wrong pin code. ";
-		if (usefulTimeOfCardChecking(numCard) == false)
+		if (a == -1)
 			s = s + "Your card expired. ";
-		if (moneyOnCardChecking(numCard, desireSum) == false)
+		if (a == -2)
 			s = s + "Not enough money on card. ";
-		if (cardInStoplistChecking(numCard, device) == false)
+		if (a == -3)
 			s = s + "Your card is in the stoplist. ";
 		return s;
 	}
