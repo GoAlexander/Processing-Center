@@ -351,9 +351,9 @@ public class WorkWithExcel {
 		FileInputStream fis = new FileInputStream(file);
 		HSSFWorkbook wb = new HSSFWorkbook(fis);
 		for(int i = 0; i < counter; i++){
-		System.out.println("QWE " + wb.getSheetAt(0).getRow(i).getCell(0));
-		System.out.println("QWE " + wb.getSheetAt(0).getRow(i).getCell(1));
-		System.out.println("QWE " + wb.getSheetAt(0).getRow(i).getCell(2));
+		System.out.println(wb.getSheetAt(0).getRow(i).getCell(0));
+		System.out.println(wb.getSheetAt(0).getRow(i).getCell(1));
+		System.out.println(wb.getSheetAt(0).getRow(i).getCell(2));
 		}
 		fis.close();	
 	}
