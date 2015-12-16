@@ -17,7 +17,7 @@ public class GUITerm {
 	private JTextField pinCode;
 	private JTextField sum;
 	private JComboBox val;
-	int counter=3;
+	private int counter=3;
 	String currency;
 
 	/**
@@ -235,5 +235,8 @@ public class GUITerm {
 		if (transaction())
 			a.setText("Ваша транзакция на сумму " + sum.getText() + " " + val.getSelectedIndex()
 					+ " выполнена успешно\n");
+	}
+	public String getCurrency(){
+		return currency;
 	}
 }
