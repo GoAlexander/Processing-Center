@@ -44,6 +44,8 @@ public final class CardCreatingGUI extends javax.swing.JFrame {
                                     temp.cur=Integer.parseInt(line.split(";")[2]);
                                     temp.pin=Integer.parseInt(line.split(";")[3]);
                                     temp.type=Integer.parseInt(line.split(";")[4]);
+                                    if(temp.type==0)
+                                        temp.limit=0;
                                     temp.number=line.split(";")[5];
                                     temp.BL=Boolean.parseBoolean(line.split(";")[6]);
                                     result.add(temp);
@@ -134,6 +136,7 @@ public final class CardCreatingGUI extends javax.swing.JFrame {
                             System.out.println("Err");
                         }
                         temp.calculateNumber();  
+   
                            String lineIn=temp.Name+";"+temp.limit+";"+temp.cur+";"+temp.pin+";"+temp.type+";"+temp.number+";"+temp.BL+"\n";
                        String output_File = "Карты.csv";
 			FileWriter writer = new FileWriter(output_File, true);
