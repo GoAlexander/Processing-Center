@@ -1,4 +1,10 @@
-﻿//Класс, в котором все методы относящиеся к Фронт Офису
+﻿import java.io.FileInputStream;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.*;
+//Класс, в котором все методы относящиеся к Фронт Офису
 
 public class FrontOffice {
 	//structures 
