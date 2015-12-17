@@ -17,6 +17,7 @@ public class Cards {
     int cur;
     int type;
     boolean BL;
+    int CVV;
     Cards(){
     numberArr= new int[16]; 
     for(int i=0;i<numberArr.length;i++)
