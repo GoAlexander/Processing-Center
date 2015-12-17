@@ -11,6 +11,7 @@ import javax.swing.border.TitledBorder;
 
 import FrontOffice.UserDataBase;
 import FrontOffice.java;
+import Converion.java;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JTextArea;
@@ -231,13 +232,18 @@ public class GUITerminal {
 		boolean res = true;
 		try {
 			int row = WorkWithExcel.findRowUser(getCardNum1());
-			int sum = Integer.parseInt(WorkWithExcel.getSum(row));
-			int cur = WorkWithExcel.findRowUser(getCardNum1());
-			if (getSum() <= sum) {
-				res = false;				
-			} else {
-				res = true;
+			double sum = Double.parseDouble(WorkWithExcel.getSum(row));
+			double newSum = 0;
+			int cur = Integer.parseInt(WorkWithExcel.getCur(row));
+			if (getCurrType() != cur) {
+				newSum = Converion.conv(getCurrType(), cur, getSum2());
+				if (newSum < sum) {
+					res = false;
+				} else {
+					res = true;
+				}
 			}
+
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -268,6 +274,10 @@ public class GUITerminal {
 	
 	public String getSum1() {
 		return sum.getText();
+	}
+
+	public double getSum2() {
+		return Double.parseDouble(sum.getText());
 	}
 
 	private boolean checkSymbols(JTextField a) {// true - есть символы, false -
