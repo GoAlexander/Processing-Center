@@ -1,6 +1,7 @@
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import javax.swing.JFrame;
 import javax.swing.JButton;
@@ -134,8 +135,14 @@ public class GUITerm {
 						if (checkNum(cardNum) && checkPin(pinCode) && validation()) {
 							if (correctPin(pinCode.getText())) {
 								currency = (String) val.getSelectedItem();
-								transaction();
-								printCheck(res);
+								if(transaction())	{		
+										//запрос авторизации
+										printCheck(res);
+									}
+									else{
+									printCheck(res);
+									//+финансовое подтверждение в Бэк-оффис
+									}
 							} else {
 								counter--;
 								res.setText("PIN-код введен неверно");
@@ -207,15 +214,37 @@ public class GUITerm {
 	}
 
 	private boolean transaction() {// Ksusha
-		return true;
+		boolean res = true;
+		try {
+			int row = WorkWithExcel.findRowUser(getCardNum1());
+			int sum = Integer.parseInt(WorkWithExcel.getSum(row));
+			if (getSum() < sum) {
+				res = false;				
+			} else {
+				res = true;
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return res;
 	}
 
 	public int getCardNum() {
 		return Integer.parseInt(cardNum.getText(), 10);
 	}
+	
+	public String getCardNum1() {
+
+		return cardNum.getText();
+	}
 
 	public int getPin() {
 		return Integer.parseInt(pinCode.getText(), 10);
+	}
+
+	public String getPin1() {
+		return pinCode.getText();
 	}
 
 	public int getSum() {
