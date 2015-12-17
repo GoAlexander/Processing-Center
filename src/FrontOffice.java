@@ -20,7 +20,7 @@ public class FrontOffice {
 		String pinCode;
 		String desireSum;
 		int cvv;
-	}
+	} 
 	
 	//Купюры
 	static class Bond {
