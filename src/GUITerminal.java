@@ -149,6 +149,7 @@ public class GUITerminal {
 								res.setText("PIN-код введен неверно");
 								if(counter == 0)
 									res.setText("PIN-код введен неверно 3 раза. Ваша карта заблокирована");
+									//добавить карту в стоп-лист
 							}
 						}}
 					}
