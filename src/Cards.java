@@ -1,3 +1,8 @@
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -9,6 +14,7 @@
  * @author Александр
  */
 public class Cards {
+    Date data;
     String Name;
     int pin;
     String number;
@@ -33,6 +39,9 @@ public class Cards {
       number="";
     BL=false;
     limit=0;
+        Calendar calendar = GregorianCalendar.getInstance();
+calendar.add(Calendar.DAY_OF_YEAR, 1085);
+data=calendar.getTime();
     }
     int findMoon() throws Exception{
          int[] numberArrCopy=new int[16];

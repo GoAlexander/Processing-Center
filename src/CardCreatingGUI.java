@@ -1,6 +1,7 @@
 
-import java.io.*;
 
+
+import java.io.*;
 import java.nio.charset.Charset;
 
 import java.nio.file.Files;
@@ -8,6 +9,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 import java.nio.file.Paths;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,7 +31,7 @@ public final class CardCreatingGUI extends javax.swing.JFrame {
     /**
      * Creates new form CardCreatingGUI
      */
-    public ArrayList<Cards> getCards() throws IOException{
+    public ArrayList<Cards> getCards() throws IOException, ParseException{
         ArrayList<Cards> result=new ArrayList<Cards>();
         
         try{
@@ -49,6 +53,8 @@ public final class CardCreatingGUI extends javax.swing.JFrame {
                                     temp.number=line.split(";")[5];
                                     temp.BL=Boolean.parseBoolean(line.split(";")[6]);
                                     temp.CVV=Integer.parseInt(line.split(";")[7]);
+                                    DateFormat format = new SimpleDateFormat("yyyy/MM", Locale.ENGLISH);
+                                    temp.data=format.parse(line.split(";")[8]);
                                     result.add(temp);
                                 }
                                     
@@ -138,8 +144,8 @@ public final class CardCreatingGUI extends javax.swing.JFrame {
                             System.out.println("Err");
                         }
                         temp.calculateNumber();  
-   
-                           String lineIn=temp.Name+";"+temp.limit+";"+temp.cur+";"+temp.pin+";"+temp.type+";"+temp.number+";"+temp.BL+";"+temp.CVV+"\n";
+   SimpleDateFormat data = new SimpleDateFormat("yyyy/MM");
+                           String lineIn=temp.Name+";"+temp.limit+";"+temp.cur+";"+temp.pin+";"+temp.type+";"+temp.number+";"+temp.BL+";"+temp.CVV+";"+data.format(temp.data)+"\n";
                        String output_File = "Карты.csv";
 			FileWriter writer = new FileWriter(output_File, true);
                         writer.write(lineIn);
@@ -151,7 +157,9 @@ public final class CardCreatingGUI extends javax.swing.JFrame {
                                 }
                          } catch (IOException ex) {
             Logger.getLogger(CardCreatingGUI.class.getName()).log(Level.SEVERE, null, ex);                  
-        }// TO
+        } catch (ParseException ex) {
+            Logger.getLogger(CardCreatingGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }// TO// TO
        
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -180,6 +188,7 @@ public final class CardCreatingGUI extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(CardCreatingGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
