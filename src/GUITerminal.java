@@ -218,7 +218,7 @@ public class GUITerm {
 		try {
 			int row = WorkWithExcel.findRowUser(getCardNum1());
 			int sum = Integer.parseInt(WorkWithExcel.getSum(row));
-			if (getSum() < sum) {
+			if (getSum() <= sum) {
 				res = false;				
 			} else {
 				res = true;
