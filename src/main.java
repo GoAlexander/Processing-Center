@@ -1,4 +1,4 @@
-import java.util.Scanner;
+﻿import java.util.Scanner;
 
 public class main {
 
@@ -27,7 +27,19 @@ public class main {
 				System.out.println("<PaymentTerminal> is not implemented yet.");				
 			}
 			else if (menu==3) {
-				System.out.println("<ATM> is not implemented yet.");
+				
+System.out.println("<ATM> is not implemented yet.");
+                                                                              EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					ATM window = new ATM(1);
+					window.MainATM.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+
 				//Отправка 
 			}
 			else if (menu==4) { //открыть в новом терминале
