@@ -112,7 +112,22 @@ public class WorkWithExcel {
 		return res;		
 	}
 
-	public static void main(String[] args) {
+public static String getCur(int rowNumber) throws IOException{
+		String res="";
+		FileInputStream fis;
+		try {
+			fis = new FileInputStream("N:/Книга1.xls");
+			Workbook wb = new HSSFWorkbook(fis);		
+			res=getCellText(wb.getSheetAt(0).getRow(rowNumber).getCell(3));
+			fis.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+		return res;		
+	}
+
+/*	public static void main(String[] args) {
 		try {
 			writeIntoExcel("N:/Книга1.xls", "1234567890123456", 1, 1, 100, 0);
 			
@@ -124,5 +139,5 @@ public class WorkWithExcel {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
+	}*/
 }
