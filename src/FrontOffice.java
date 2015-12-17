@@ -10,7 +10,7 @@ public class FrontOffice {
 	}
 	
 	//"структура" юзера, здесь хранится вся инфа, которая должна храниться во Фронт Офисе
-	class UserDataBase { //нужно немного отредактировать с учётом задания
+	static class UserDataBase { //нужно немного отредактировать с учётом задания
 		//int pin;
 		//long deadline_of_card;
 		Sum oper_sum;
@@ -19,6 +19,7 @@ public class FrontOffice {
 		String numCard;
 		String pinCode;
 		String desireSum;
+		int cvv;
 	}
 	
 	//Купюры
