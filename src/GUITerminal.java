@@ -10,7 +10,6 @@ import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 
 import FrontOffice.UserDataBase;
-
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JTextArea;
@@ -141,6 +140,10 @@ public class GUITerminal {
 								currency = (String) val.getSelectedItem();
 								if(transaction())	{		
 										//запрос авторизации
+									/*	FrontOffice.usefulTimeOfCardChecking(getCardNum());
+										FrontOffice.moneyOnCardChecking(getCardNum(), getSum1());
+										FrontOffice.cardInStoplistChecking(getCardNum(), "terminal");*/
+										//FrontOffice.answerMessage(getCardNum(), getPin1(), getSum1(), "terminal");
 										printCheck(res);
 									}
 									else{
@@ -213,7 +216,7 @@ public class GUITerminal {
 	private boolean correctPin(String a) {// делает Ксюша
 	int counter = 0;
 		boolean pinCorrect = false;
-		if (UserDataBase.pinChecking(getCardNum1(), getPin1())) {
+		if (FrontOffice.pinChecking(getCardNum1(), getPin1())) {
 			pinCorrect = true;
 			}
 		return pinCorrect;
@@ -260,6 +263,10 @@ public class GUITerminal {
 
 	public int getSum() {
 		return Integer.parseInt(sum.getText(), 10);
+	}
+	
+	public String getSum1() {
+		return sum.getText();
 	}
 
 	private boolean checkSymbols(JTextField a) {// true - есть символы, false -
