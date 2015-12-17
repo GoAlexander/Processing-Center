@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 
 import FrontOffice.UserDataBase;
+import FrontOffice.java;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JTextArea;
