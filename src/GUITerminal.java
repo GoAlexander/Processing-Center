@@ -11,7 +11,7 @@ import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JTextArea;
 
-public class GUITerm {
+public class GUITerminal {
 
 	private JFrame frame;
 	private JTextField cardNum;
@@ -218,6 +218,7 @@ public class GUITerm {
 		try {
 			int row = WorkWithExcel.findRowUser(getCardNum1());
 			int sum = Integer.parseInt(WorkWithExcel.getSum(row));
+			
 			if (getSum() <= sum) {
 				res = false;				
 			} else {
