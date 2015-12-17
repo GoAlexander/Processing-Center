@@ -218,7 +218,7 @@ public class GUITerminal {
 		try {
 			int row = WorkWithExcel.findRowUser(getCardNum1());
 			int sum = Integer.parseInt(WorkWithExcel.getSum(row));
-			
+			int cur = WorkWithExcel.findRowUser(getCardNum1());
 			if (getSum() <= sum) {
 				res = false;				
 			} else {
@@ -268,5 +268,15 @@ public class GUITerminal {
 	}
 	public String getCurrency(){
 		return currency;
+	}
+	public int getCurrType() {
+		int res = 0;
+		if (getCurrency().equals("RUB"))
+			res = 0;
+		else if (getCurrency().equals("USD"))
+			res = 1;
+		else
+			res = 2;
+		return res;
 	}
 }
