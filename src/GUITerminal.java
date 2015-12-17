@@ -28,7 +28,7 @@ public class GUITerminal {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					GUITerm window = new GUITerm();
+					GUITerminal window = new GUITerminal();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -40,7 +40,7 @@ public class GUITerminal {
 	/**
 	 * Create the application.
 	 */
-	public GUITerm() {
+	public GUITerminal() {
 		initialize();
 	}
 
