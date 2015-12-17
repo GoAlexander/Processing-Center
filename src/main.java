@@ -30,10 +30,10 @@ public class main {
 			else if (menu==3) {
 				
 System.out.println("<ATM> is not implemented yet.");
-                                                                              EventQueue.invokeLater(new Runnable() {
+                                                                            EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ATM window = new ATM(1);
+					ATMInterface window = new ATMInterface(1);
 					window.MainATM.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
