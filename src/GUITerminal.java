@@ -1,3 +1,4 @@
+import WorkWithExcel;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -206,7 +207,12 @@ public class GUITerminal {
 	}
 
 	private boolean correctPin(String a) {// делает Ксюша
-		return false;
+	int counter = 0;
+		boolean pinCorrect = false;
+		if (UserDataBase.pinChecking(getCardNum1(), getPin1())) {
+			pinCorrect = true;
+			}
+		return pinCorrect;
 	}
 
 	private boolean validation() {// Ksusha
