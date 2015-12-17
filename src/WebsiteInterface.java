@@ -1,8 +1,11 @@
+
 //task1
 import java.text.ParseException;
 import java.util.Random;
 import javax.swing.JFormattedTextField;
 import javax.swing.text.MaskFormatter;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 public class WebsiteInterface extends javax.swing.JFrame {
     
     /**
@@ -45,6 +48,13 @@ public class WebsiteInterface extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         
         jButton1.setText("Подтвердить");
+        jButton1.addActionListener(new ActionListener() {
+            
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                save(jTextField1.getText(),jTextField2.getText(),Month.getSelectedIndex(),Year.getSelectedIndex());
+            }
+        });
         
         jLabel1.setText("Номер карты");
         
@@ -137,7 +147,14 @@ public class WebsiteInterface extends javax.swing.JFrame {
         
         pack();
     }// </editor-fold>
-    
+    public void save(String text,String text1,int mnth,int ye) {
+        cardnumber = Integer.parseInt(text);
+        cvv = Integer.parseInt(text1);
+        month=mnth;
+        year=ye;
+        
+        
+    }
     /**
      * @param args the command line arguments
      */
@@ -158,7 +175,10 @@ public class WebsiteInterface extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField jTextField2;
     //  private javax.swing.JFormattedTextField jTextField3;
     // End of variables declaration
-    
+    public int cardnumber;
+    public int cvv;
+    public int month;
+    public int year;
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
