@@ -71,7 +71,7 @@ public class FrontOffice {
 	public static SimpleDateFormat data = new SimpleDateFormat("yyyy/MM/dd");
 
 	public static int findRowUser(String numCard) throws IOException {
-		FileInputStream fis = new FileInputStream("C:/Processing-Center/excel/DB.xls");
+		FileInputStream fis = new FileInputStream("../Processing-Center/excel/DB.xls");
 		Workbook wb = new HSSFWorkbook(fis);
 		int row = 0;
 		for (int i = 0;; i++) {
@@ -85,7 +85,7 @@ public class FrontOffice {
 	}
 
 	public static int findColUser(String phrase) throws IOException {
-		FileInputStream fis = new FileInputStream("C:/Processing-Center/excel/DB.xls");
+		FileInputStream fis = new FileInputStream("../Processing-Center/excel/DB.xls");
 		Workbook wb = new HSSFWorkbook(fis);
 		int col = 0;
 		for (int i = 0;; i++) {
@@ -100,7 +100,7 @@ public class FrontOffice {
 
 	public static boolean pinChecking(String numCard, String pinCode) throws IOException {
 		try {
-			FileInputStream fis = new FileInputStream("C:/Processing-Center/excel/DB.xls");
+			FileInputStream fis = new FileInputStream("../Processing-Center/excel/DB.xls");
 			Workbook wb = new HSSFWorkbook(fis);
 			int row = findRowUser(numCard);
 			int col = findColUser("Пин код");
@@ -118,7 +118,7 @@ public class FrontOffice {
 
 	public static boolean usefulTimeOfCardChecking(String numCard) throws IOException {
 		try {
-			FileInputStream fis = new FileInputStream("C:/Processing-Center/excel/DB.xls");
+			FileInputStream fis = new FileInputStream("../Processing-Center/excel/DB.xls");
 			Workbook wb = new HSSFWorkbook(fis);
 			int row = findRowUser(numCard);
 			int col = findColUser("Срок карты");
@@ -158,7 +158,7 @@ public class FrontOffice {
 
 	public static boolean moneyOnCardChecking(String numCard, String desireSum) throws IOException {
 		try {
-			FileInputStream fis = new FileInputStream("C:/Processing-Center/excel/DB.xls");
+			FileInputStream fis = new FileInputStream("../Processing-Center/excel/DB.xls");
 			Workbook wb = new HSSFWorkbook(fis);
 			int row = findRowUser(numCard);
 			int col = findColUser("Остаток");
@@ -178,7 +178,7 @@ public class FrontOffice {
 
 	public static boolean cardInStoplistChecking(String numCard, String device) throws IOException {//device:terminal or atm
 		try {
-			FileInputStream fis = new FileInputStream("C:/Processing-Center/excel/DB.xls");
+			FileInputStream fis = new FileInputStream("../Processing-Center/excel/DB.xls");
 			Workbook wb = new HSSFWorkbook(fis);
 			int row = findRowUser(numCard);
 			int col = 0;
