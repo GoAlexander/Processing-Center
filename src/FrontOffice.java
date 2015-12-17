@@ -104,6 +104,24 @@ public class FrontOffice {
 		return col;
 	}
 
+	public static boolean cvvChecking(String numCard, String cvv) throws IOException {
+		try {
+			FileInputStream fis = new FileInputStream("../Processing-Center/excel/DB.xls");
+			Workbook wb = new HSSFWorkbook(fis);
+			int row = findRowUser(numCard);
+			int col = findColUser("CVV");
+			if (cvv.equals(getCellText(wb.getSheetAt(0).getRow(row).getCell(col)))) {
+				fis.close();
+				return true;
+			} else {
+				fis.close();
+				return false;
+			}
+		} catch (NullPointerException e) {
+			return false;
+		}
+	}
+
 	public static boolean pinChecking(String numCard, String pinCode) throws IOException {
 		try {
 			FileInputStream fis = new FileInputStream("../Processing-Center/excel/DB.xls");
