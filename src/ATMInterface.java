@@ -32,36 +32,97 @@ import java.awt.SystemColor;
 import java.awt.Window;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.JComboBox;
+
+
+public class ATMInterface {
+	// structures
+	class Answer { // TODO Make it
+
+	}
+
+	class Bonds { // TODO Make it
+
+	}
+
+	class Sum {
+		double sum;
+		int type_of_money; // TODO договориться какая
+							// валюта - какой номер (в
+							// документацию)
+	}
+
+	// methods
+	void dataCardInput() { // повторяется с другим
+							// интерфейсом(терминал),
+							// нормально или что-то
+							// предпринять? (функции ниже
+							// тоже повторяются)
+		System.out.println("Method <dataCardInput> is not implemented yet.");
+	}
+
+	int pinInput(int pin) {
+		// TODO pin будет только из цифр, верно?
+		System.out.println("Method <pinInput> is not implemented yet.");
+		return pin;
+	}
+
+	FrontOffice.Sum sumOfOperationInput(FrontOffice.Sum oper_sum){
+		System.out.println("Method <sumOfOperationInput> is not implemented yet.");
+		return oper_sum;
+	}
+	FrontOffice.Bond payment(int sum, FrontOffice.Bond bonds_sum_changing){
+		System.out.println("Method <payment> is not implemented yet.");
+		return bonds_sum_changing;
+	}
+
+	String checkPrinting(String check) {
+		System.out.println("Method <checkPrinting> is not implemented yet.");
+		return check;
+	}
+
+	/*
+	 * Это метод типа get, только посылаем все
+	 * данные в ФО
+	 */
+	// TODO во ФО сделать метод, который будет
+	// приниматься все эти данные?
+	// TODO Зачем вообще нужен authorizationRequest в
+	// данном случае???
+	void authorizationRequest() {
+		System.out.println("Method <authorizationRequest> is not implemented yet.");
+	}
+
+	void receivingProcessingOfAnswer(Answer receiving_answer) {
+		// при положительном ответе от ФО здесь
+		// все вызовы методов расписать (чтобы
+		// расплатиться с клиентом)
+		System.out.println("Method <receivingProcessingOfAnswer> is not implemented yet.");
+	}
+
+
 
 // Интерфейс банкомата (задание 4 Харчевникова А)
-public class ATMInterface {
+public class ATM {
 
-	public  int ATMNumber;
-	public   int MIN_SUM = 10;
-	public   int MAX_SUM = 50000;
-	public  JFrame MainATM;
-	public  JPanel panelAuthorisation;
-	public  JTextField textFieldCardNumber, textFieldSum;
-	public  JPanel panelCardNumber, panelPinNumbers, pinPadPanel, panelOperations;
-	public  JComboBox comboBoxCurrency;
+	private static int MIN_SUM = 100;
+	private static int MAX_SUM = 50000;
+	private JFrame MainATM;
+	private JPanel panelAuthorisation;
+	private JTextField textFieldCardNumber, textFieldSum;
+	private JPanel panelCardNumber, panelPinNumbers, pinPadPanel, panelOperations;
 
-	public  JPasswordField passwordField;
-	public  JButton enterButton, clearButton, zeroButton, buttonSuccess;
+	private JPasswordField passwordField;
+	private JButton enterButton, clearButton, zeroButton, buttonSuccess;
 
-	public JButton btnDrawOperation, btnCashOperation, btnBalance, buttonClear;
+	private JButton buttonClearOperation, btnDrawOperation, btnCashOperation, btnBalance, buttonClear;
 
-	public  String inputNumberCard = ""; // номер карты
-	public  String input = "";// пин-код
-	public  String[] valString = { "RUB", "EUR", "USD", "GBP" };
+	private String inputNumberCard = ""; // номер карты
+	private String input = "";// пин-код
 
-	public  JScrollPane scrollPaneInform, scrollPaneResult;
-	public JTextArea textAreaOut, textAreaOutPut, textAreaResult;
-	
-	public FrontOffice.Bond atmBonds = new FrontOffice.Bond(); // купюры в банкомате
-	
+	JScrollPane scrollPaneInform, scrollPaneResult;
+	JTextArea textAreaOut, textAreaOutPut, textAreaResult;
 
-	public  JButton[] numberButtons = new JButton[9];
+	private JButton[] numberButtons = new JButton[9];
 
 	private static int counter = 3;
 
@@ -72,7 +133,7 @@ public class ATMInterface {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ATMInterface window = new ATMInterface(1);
+					ATM window = new ATM();
 					window.MainATM.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -84,8 +145,7 @@ public class ATMInterface {
 	/**
 	 * Create the application.
 	 */
-	public ATMInterface(int ATMNumber) throws SQLException, Exception {
-		this.ATMNumber = ATMNumber;
+	public ATM() throws SQLException, Exception {
 		initialize();
 	}
 
@@ -93,92 +153,22 @@ public class ATMInterface {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		
-		
-
 		MainATM = new JFrame();
 		MainATM.setModalExclusionType(ModalExclusionType.APPLICATION_EXCLUDE);
-		MainATM.setTitle("\u0411\u0430\u043D\u043A\u043E\u043C\u0430\u0442 \u21161");
+		MainATM.setTitle("\u0411\u0430\u043D\u043A");
 		MainATM.setBounds(100, 100, 437, 433);
 		MainATM.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		MainATM.getContentPane().setLayout(null);
 
-		panelOperations = new JPanel();
-		panelOperations.setBounds(0, 0, 421, 418);
-		MainATM.getContentPane().add(panelOperations);
-		panelOperations.setLayout(null);
-
-		panelOperations.setVisible(false);
-
-		// scrollPaneInform.setColumnHeaderView(textAreaOut);
-
-		textAreaOutPut = new JTextArea();
-		textAreaOutPut.setEditable(false);
-		// scrollPaneInform.setRowHeaderView(textAreaOutPut);
-
-		scrollPaneInform = new JScrollPane(textAreaOutPut);
-		scrollPaneInform.setBounds(25, 27, 180, 219);
-		panelOperations.add(scrollPaneInform);
-		// panelOperations.add(label);
-
-		textFieldSum = new JTextField();
-		textFieldSum.setBounds(225, 46, 184, 20);
-		panelOperations.add(textFieldSum);
-		textFieldSum.setColumns(10);
-
-		btnDrawOperation = new JButton(
-				"\u0421\u043D\u044F\u0442\u0438\u0435 \u043D\u0430\u043B\u0438\u0447\u043D\u044B\u0445");
-		btnDrawOperation.setBounds(25, 270, 175, 37);
-
-		panelOperations.add(btnDrawOperation);
-		btnDrawOperation.addActionListener(new DrawListener());
-
-		btnCashOperation = new JButton(
-				"\u0412\u043D\u0435\u0441\u0435\u043D\u0438\u0435 \u043D\u0430\u043B\u0438\u0447\u043D\u044B\u0445");
-		btnCashOperation.setBounds(25, 326, 180, 37);
-		panelOperations.add(btnCashOperation);
-		btnCashOperation.addActionListener(new CashListener());
-
-		JLabel label_Result = new JLabel("\u0420\u0435\u0437\u0443\u043B\u044C\u0442\u0430\u0442:");
-		label_Result.setBounds(227, 152, 135, 14);
-		panelOperations.add(label_Result);
-
-		btnBalance = new JButton("\u0411\u0430\u043B\u0430\u043D\u0441");
-		btnBalance.setBounds(234, 326, 180, 37);
-		panelOperations.add(btnBalance);
-
-		textAreaResult = new JTextArea();
-		textAreaResult.setEditable(false);
-
-		scrollPaneResult = new JScrollPane(textAreaResult);
-		scrollPaneResult.setBounds(227, 177, 184, 69);
-		panelOperations.add(scrollPaneResult);
-
-		JLabel label_Sum = new JLabel("\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0441\u0443\u043C\u043C\u0443:");
-		label_Sum.setBounds(227, 28, 95, 14);
-		panelOperations.add(label_Sum);
-
-		JLabel label_3 = new JLabel("\u0427\u0435\u043A:");
-		label_3.setBounds(25, 11, 68, 14);
-		panelOperations.add(label_3);
-
 		
-		comboBoxCurrency = new JComboBox(valString);
-		comboBoxCurrency.setBounds(331, 100, 60, 28);
-		panelOperations.add(comboBoxCurrency);
-
-		JLabel lblNewLabelCurrency = new JLabel("\u0412\u0430\u043B\u044E\u0442\u0430:");
-		lblNewLabelCurrency.setBounds(227, 103, 95, 14);
-		panelOperations.add(lblNewLabelCurrency);
 
 		panelAuthorisation = new JPanel();
 		panelAuthorisation.setBounds(0, 0, 421, 405);
 		MainATM.getContentPane().add(panelAuthorisation);
 		panelAuthorisation.setLayout(null);
-
-		// panelAuthorisation.setBorder(BorderFactory.createEmptyBorder(10, 10,
-		// 10, 10));
-		// panelAuthorisation.setMaximumSize(new Dimension(1100, 700));
+		
+		//panelAuthorisation.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+		//panelAuthorisation.setMaximumSize(new Dimension(1100, 700));
 
 		panelCardNumber = new JPanel();
 		panelCardNumber.setBorder(new TitledBorder(null,
@@ -197,15 +187,13 @@ public class ATMInterface {
 		buttonSuccess = new JButton("\u0413\u043E\u0442\u043E\u0432\u043E");
 		buttonSuccess.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				if(isValidCardNumber()){
+				if ((NumberChek(textFieldCardNumber.getText())) && (textFieldCardNumber.getText().length() == 3) ) {
 					inputNumberCard += textFieldCardNumber.getText();
 					System.out.println(inputNumberCard);
-
-				} else {
+				
+				} else  {
 
 					JOptionPane.showMessageDialog(null, "Неверный формат!", "Ошибка", JOptionPane.WARNING_MESSAGE);
-					textFieldCardNumber.setText("");
 
 				}
 			}
@@ -309,20 +297,29 @@ public class ATMInterface {
 		initializeOperations();
 
 	}
-
-	private boolean isValidCardNumber() {
-		
-		if(textFieldCardNumber.getText().matches("(?i).*[a-za-я].*"))
-		{
-			return false;
+	
+	private boolean isValidCardNumber(){
+		String message = "";
+		if (!NumberChek(textFieldCardNumber.getText())) {
+		message = "Введите число";
+	
+		} 
+		else if (textFieldCardNumber.getText().length() != 16){
+			message = "Неверный формат!";
 			
-		} else if (textFieldCardNumber.getText().length() != 16) {
-			return false;
-
-		} else {
+		}
+		else {
 			return true;
 		}
+		// сообщение пользователю
+		JOptionPane.showMessageDialog(null, message, "Ошибка", JOptionPane.WARNING_MESSAGE);
+		textFieldCardNumber.requestFocus();
+		textFieldCardNumber.selectAll();
+		//textFieldCardNumber.setText(null);
+		return false;
+		
 	}
+	
 
 	private boolean isValidDraw() {
 		String message = "";
@@ -333,17 +330,21 @@ public class ATMInterface {
 
 			// если < 10
 		} else if (Integer.parseInt(textFieldSum.getText()) < MIN_SUM) {
-			message = "Минимум для снятия: 10";
+			message = "Минимум для снятия: 100";
 
 			// если > 250
 		} else if (Integer.parseInt(textFieldSum.getText()) > MAX_SUM) {
 			message = "Максимум для снятия: 50000";
 
 			// если не кратно 10
-		} else if (Integer.parseInt(textFieldSum.getText()) % 10 != 0) {
-			message = "Сумма должна быть кратной 10";
-		}
-			
+		} else if (Integer.parseInt(textFieldSum.getText()) % 100 != 0) {
+			message = "Сумма должна быть кратной 100";
+
+			// недостаточно средств
+		} // else if (Integer.parseInt(Balance) -
+			// Integer.parseInt(textFieldSum.getText()) < 0) {
+			// message = "Недостаточно средств";
+
 		// если все ок
 		else {
 			return true;
@@ -359,32 +360,20 @@ public class ATMInterface {
 
 	private void Draw() throws SQLException, Exception {
 		if (isValidDraw()) {
-			String money = textFieldSum.getText();
-
+			int money = Integer.parseInt(textFieldSum.getText());
 			
-			//if(/*FrontOffice.transactionControl(inputNumberCard, input, money, "atm") == 1*/)
-			{
 			textAreaResult.setText(null);
-			//textAreaResult.append(/*FrontOffice.String answerMessage(inputNumberCard, input, money, "atm")*/);
-			
-			textAreaResult.append("Вы сняли наличные в размере:" + money + " " + comboBoxCurrency.getSelectedItem() + "\n");
-		 
-			textAreaResult.append("Баланс:" + "\n" + "\n");
+			textAreaResult.append("Вы сняли наличные в размере:" + "\n");
+			textAreaResult.append(textFieldSum.getText()+ "\n");
+			textAreaResult.append("Баланс:" + "\n");
 			printCheck("Снятие");
 			
-			atmBonds =  FrontOffice.bondSelection(atmBonds, Integer.parseInt(money));
-			textAreaResult.append("Текущее состояние купюр в кассетах:" + "\n" );
-			
-			textAreaResult.append(atmBonds.toString());
-
-			}
-			//else 
-			{
-				//textAreaResult.setText(null);
-				//textAreaResult.append(/*FrontOffice.String answerMessage(inputNumberCard, input, money, "atm")*/);
-			}
-
-			
+			/// int balance = Integer.parseInt(Balance);
+			// money = balance - money;
+			// String n = "Update password set balance=" + money + " where
+			/// login='" + Login + "'";
+			// SQLRequest(n);
+			// displayBalance();
 		}
 	}
 
@@ -396,14 +385,14 @@ public class ATMInterface {
 			message = "Введите число";
 
 			// если < 100
-		} else if (Double.parseDouble(textFieldSum.getText()) < 10.0) {
-			message = "Минимум для пополнения: 10";
+		} else if (Double.parseDouble(textFieldSum.getText()) < 100.0) {
+			message = "Минимум для пополнения: 100";
 
 			// если > 500
 		} else if (Double.parseDouble(textFieldSum.getText()) > 50000.0) {
 			message = "Максимум для пополнения: 50000";
-		} else if (Integer.parseInt(textFieldSum.getText()) % 10 != 0) {
-			message = "Сумма должна быть кратной 10";
+		} else if (Integer.parseInt(textFieldSum.getText()) % 100 != 0) {
+				message = "Сумма должна быть кратной 100";
 
 			// если все ок
 		} else {
@@ -421,12 +410,18 @@ public class ATMInterface {
 		if (isValidCash()) {
 			textAreaResult.setText(null);
 			int money = Integer.parseInt(textFieldSum.getText());
-
+			
 			textAreaResult.append("Вы внесли наличные в размере:" + "\n");
-			textAreaResult.append(textFieldSum.getText() + "\n");
+			textAreaResult.append(textFieldSum.getText()+ "\n");
 			textAreaResult.append("Баланс:" + "\n");
 			printCheck("Внесение");
-
+			
+			
+			/*
+			 * int balance = Integer.parseInt(Balance); money = balance + money;
+			 * String n = "Update password set balance=" + money +
+			 * " where login='" + Login + "'"; SQLRequest(n); displayBalance();
+			 */
 		}
 	}
 
@@ -441,6 +436,77 @@ public class ATMInterface {
 	}
 
 	private void initializeOperations() {
+		
+		panelOperations = new JPanel();
+		panelOperations.setBounds(0, 0, 421, 418);
+		MainATM.getContentPane().add(panelOperations);
+		panelOperations.setLayout(null);
+		
+		panelOperations.setVisible(false);
+		
+		
+
+		// scrollPaneInform.setColumnHeaderView(textAreaOut);
+
+		textAreaOutPut = new JTextArea();
+		textAreaOutPut.setEditable(false);
+		// scrollPaneInform.setRowHeaderView(textAreaOutPut);
+
+		scrollPaneInform = new JScrollPane(textAreaOutPut);
+		scrollPaneInform.setBounds(25, 27, 180, 219);
+		panelOperations.add(scrollPaneInform);
+		// panelOperations.add(label);
+		
+
+		textFieldSum = new JTextField();
+		textFieldSum.setBounds(225, 46, 184, 20);
+		panelOperations.add(textFieldSum);
+		textFieldSum.setColumns(10);
+
+		buttonClearOperation = new JButton("\u041E\u0447\u0438\u0441\u0442\u0438\u0442\u044C");
+		buttonClearOperation.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				textFieldSum.setText(null);
+			}
+		});
+		buttonClearOperation.setBounds(322, 77, 89, 29);
+		panelOperations.add(buttonClearOperation);
+
+		btnDrawOperation = new JButton(
+				"\u0421\u043D\u044F\u0442\u0438\u0435 \u043D\u0430\u043B\u0438\u0447\u043D\u044B\u0445");
+		btnDrawOperation.setBounds(25, 270, 175, 37);
+
+		panelOperations.add(btnDrawOperation);
+		btnDrawOperation.addActionListener(new DrawListener());
+
+		btnCashOperation = new JButton(
+				"\u0412\u043D\u0435\u0441\u0435\u043D\u0438\u0435 \u043D\u0430\u043B\u0438\u0447\u043D\u044B\u0445");
+		btnCashOperation.setBounds(25, 326, 180, 37);
+		panelOperations.add(btnCashOperation);
+		btnCashOperation.addActionListener(new CashListener());
+
+		JLabel label_Result = new JLabel("\u0420\u0435\u0437\u0443\u043B\u044C\u0442\u0430\u0442:");
+		label_Result.setBounds(227, 152, 135, 14);
+		panelOperations.add(label_Result);
+
+		btnBalance = new JButton("\u0411\u0430\u043B\u0430\u043D\u0441");
+		btnBalance.setBounds(234, 326, 180, 37);
+		panelOperations.add(btnBalance);
+
+		textAreaResult = new JTextArea();
+		textAreaResult.setEditable(false);
+
+		scrollPaneResult = new JScrollPane(textAreaResult);
+		scrollPaneResult.setBounds(227, 177, 184, 69);
+		panelOperations.add(scrollPaneResult);
+
+		JLabel label_Sum = new JLabel("\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0441\u0443\u043C\u043C\u0443:");
+		label_Sum.setBounds(227, 28, 95, 14);
+		panelOperations.add(label_Sum);
+
+		JLabel label_3 = new JLabel("\u0427\u0435\u043A:");
+		label_3.setBounds(25, 11, 68, 14);
+		panelOperations.add(label_3);
 
 		JLabel label1 = new JLabel(
 				"\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0441\u0443\u043C\u043C\u0443 \u043E\u043F\u0435\u0440\u0430\u0446\u0438\u0438:");
@@ -448,15 +514,15 @@ public class ATMInterface {
 		label1.setFont(new Font("Tahoma", Font.PLAIN, 11));
 
 	}
-
-	private void printCheck(String message) {
+	
+	private void printCheck(String message){
 		textAreaOutPut.setText(null);
 		textAreaOutPut.setLineWrap(true);
-	
+
 		textAreaOutPut.append("          ОАО <Банк>   " + "\n");
 
-		textAreaOutPut.append(message + " наличных" + "\n"); // Или другая
-																// операция
+		textAreaOutPut.append(message + " наличных"+ "\n"); // Или другая
+															// операция
 
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd         HH:mm:ss");
 		Date currentDate = new Date();
@@ -464,13 +530,13 @@ public class ATMInterface {
 
 		textAreaOutPut.append(dateFormat.format(currentDate) + "\n" + "\n");
 
-		textAreaOutPut.append("Сумма: " + textFieldSum.getText()+ " " + comboBoxCurrency.getSelectedItem() + "\n");
+		textAreaOutPut.append("Сумма:" + "\n");
 
 		textAreaOutPut.append("Баланс карты:" + "\n");
 		textAreaOutPut.append("Комиссия:" + "0 RUB" + "\n");
-		textAreaOutPut.append("Номер карты:" + inputNumberCard + "\n");
-
-		textAreaOutPut.append("Банкомат:" + "№" + ATMNumber + "\n" + "\n");
+		textAreaOutPut.append("Номер карты:" + inputNumberCard +"\n");
+		textAreaOutPut.append("Номер операции:" + "\n");
+		textAreaOutPut.append("Банкомат:" + "\n" + "\n");
 
 		textAreaOutPut.append("***СПАСИБО!***");
 
@@ -480,8 +546,9 @@ public class ATMInterface {
 		System.out.println("Сумма:");
 		System.out.println("Баланс карты:");
 		System.out.println("Комиссия:" + "0 RUB");
-		System.out.println("Номер карты:" + inputNumberCard);// добавить номер карты
-		System.out.println("Банкомат: " + "№" + ATMNumber);
+		System.out.println("Номер карты:");// добавить номер карты
+		System.out.println("Номер операции:");
+		System.out.println("Банкомат:");
 		System.out.println("Код авторизации:");
 		System.out.println("СПАСИБО!");
 	}
@@ -502,9 +569,12 @@ public class ATMInterface {
 
 	class EnterListener implements ActionListener {
 
+		// @SuppressWarnings("deprecation")
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			
+			// TODO Auto-generated method stub
+
+			// counter--;
 			try {
 				if (counter != 0) {
 
@@ -512,9 +582,9 @@ public class ATMInterface {
 
 						counter--;
 
-						if (Authentication.authenticatePIN(input) /*FrontOffice.pinChecking(inputNumberCard, input)*/) {
-							
-						
+						if (Authentication.authenticatePIN(input)) {
+							// JOptionPane.showMessageDialog(null, "Успешная
+							// Авторизация!");
 							JOptionPane.showMessageDialog(null, "Успешная Авторизация!", "Cообщение",
 									JOptionPane.INFORMATION_MESSAGE);
 							panelOperations.setVisible(true);
@@ -588,7 +658,8 @@ public class ATMInterface {
 
 	}
 
-
+	
+}
 
 
 }
