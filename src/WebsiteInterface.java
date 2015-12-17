@@ -27,14 +27,14 @@ public class WebsiteInterface extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JFormattedTextField(new MaskFormatter("#### #### #### ####"));
         jLabel2 = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        //  jRadioButton1 = new javax.swing.JRadioButton();
+        // jRadioButton2 = new javax.swing.JRadioButton();
         jTextField2 = new javax.swing.JFormattedTextField(new MaskFormatter("###"));
         jLabel3 = new javax.swing.JLabel();
         Month = new javax.swing.JComboBox<>();
         Year = new javax.swing.JComboBox<>();
-        jLabel4 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JFormattedTextField(new MaskFormatter("#####"));
+        // jLabel4 = new javax.swing.JLabel();
+        //  jTextField3 = new javax.swing.JFormattedTextField(new MaskFormatter("#####"));
         jLabel5 = new javax.swing.JLabel();
         Random sum= new Random();
         int s=sum.nextInt(2000);
@@ -50,9 +50,9 @@ public class WebsiteInterface extends javax.swing.JFrame {
         
         jLabel2.setText("Срок действия");
         
-        jRadioButton1.setText("Visa");
+        // jRadioButton1.setText("Visa");
         
-        jRadioButton2.setText("MasterCard");
+        // jRadioButton2.setText("MasterCard");
         
         jLabel3.setText("CVV");
         
@@ -60,7 +60,7 @@ public class WebsiteInterface extends javax.swing.JFrame {
         
         Year.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "16", "17", "18", "19", "20", "21", "22", "23" }));
         
-        jLabel4.setText("Подарочная карта");
+        //     jLabel4.setText("Подарочная карта");
         
         jLabel5.setText("Итого к оплате:"+s+"руб");
         
@@ -78,7 +78,8 @@ public class WebsiteInterface extends javax.swing.JFrame {
                                                                                               .addComponent(jLabel1)
                                                                                               .addComponent(jLabel2)
                                                                                               .addComponent(jLabel3)
-                                                                                              .addComponent(jLabel4))
+                                                                                              // .addComponent(jLabel4)
+                                                                                              )
                                                                                     .addGap(28, 28, 28)
                                                                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                                                               .addGroup(layout.createSequentialGroup()
@@ -90,12 +91,14 @@ public class WebsiteInterface extends javax.swing.JFrame {
                                                                                                         .addGap(35, 35, 35)
                                                                                                         .addComponent(Year, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                                                                               .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                                                                                        .addComponent(jTextField3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE)
+                                                                                                        // .addComponent(jTextField3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE)
                                                                                                         .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.LEADING))))
-                                                                          .addGroup(layout.createSequentialGroup()
-                                                                                    .addComponent(jRadioButton1)
-                                                                                    .addGap(38, 38, 38)
-                                                                                    .addComponent(jRadioButton2))))
+                                                                          //    .addGroup(layout.createSequentialGroup()
+                                                                          //            .addComponent(jRadioButton1)
+                                                                          //         .addGap(38, 38, 38)
+                                                                          //        .addComponent(jRadioButton2))
+                                                                          ))
+                                                      
                                                       .addGroup(layout.createSequentialGroup()
                                                                 .addGap(144, 144, 144)
                                                                 .addComponent(jButton1)))
@@ -105,10 +108,10 @@ public class WebsiteInterface extends javax.swing.JFrame {
                                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                           .addContainerGap(20, Short.MAX_VALUE)
-                                          .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                                    .addComponent(jRadioButton1)
-                                                    .addComponent(jRadioButton2))
-                                          .addGap(35, 35, 35)
+                                          /* .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                           .addComponent(jRadioButton1)
+                                           .addComponent(jRadioButton2))
+                                           */.addGap(35, 35, 35)
                                           .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                                     .addComponent(jLabel1)
                                                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -123,8 +126,9 @@ public class WebsiteInterface extends javax.swing.JFrame {
                                                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                           .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                           .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                                    .addComponent(jLabel4)
-                                                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                    // .addComponent(jLabel4)
+                                                    // .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    )
                                           .addGap(43, 43, 43)
                                           .addComponent(jLabel5)
                                           .addGap(18, 18, 18)
@@ -137,6 +141,25 @@ public class WebsiteInterface extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
+    
+    
+    // Variables declaration - do not modify
+    private javax.swing.JComboBox<String> Month;
+    private javax.swing.JComboBox<String> Year;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    //   private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    //  private javax.swing.JRadioButton jRadioButton1;
+    // private javax.swing.JRadioButton jRadioButton2;
+    private javax.swing.JFormattedTextField jTextField1;
+    private javax.swing.JFormattedTextField jTextField2;
+    //  private javax.swing.JFormattedTextField jTextField3;
+    // End of variables declaration
+    
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -173,23 +196,4 @@ public class WebsiteInterface extends javax.swing.JFrame {
             }
         });
     }
-    
-    // Variables declaration - do not modify
-    private javax.swing.JComboBox<String> Month;
-    private javax.swing.JComboBox<String> Year;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JFormattedTextField jTextField1;
-    private javax.swing.JFormattedTextField jTextField2;
-    private javax.swing.JFormattedTextField jTextField3;
-    // End of variables declaration
-    
-    
-    
 }
