@@ -362,7 +362,7 @@ public class ATMInterface {
 			String money = textFieldSum.getText();
 
 			
-			//if(/*FrontOffice.transactionControl(inputNumberCard, input, money, "atm") == 1*/)
+			if(FrontOffice.transactionControl(inputNumberCard, input, money, "atm") == 1)
 			{
 			textAreaResult.setText(null);
 			//textAreaResult.append(/*FrontOffice.String answerMessage(inputNumberCard, input, money, "atm")*/);
@@ -378,10 +378,10 @@ public class ATMInterface {
 			textAreaResult.append(atmBonds.toString());
 
 			}
-			//else 
+			else 
 			{
-				//textAreaResult.setText(null);
-				//textAreaResult.append(/*FrontOffice.String answerMessage(inputNumberCard, input, money, "atm")*/);
+				textAreaResult.setText(null);
+				textAreaResult.append(FrontOffice.String answerMessage(inputNumberCard, input, money, "atm"));
 			}
 
 			
@@ -512,7 +512,7 @@ public class ATMInterface {
 
 						counter--;
 
-						if (Authentication.authenticatePIN(input) /*FrontOffice.pinChecking(inputNumberCard, input)*/) {
+						if (FrontOffice.pinChecking(inputNumberCard, input)) {
 							
 						
 							JOptionPane.showMessageDialog(null, "Успешная Авторизация!", "Cообщение",
@@ -587,8 +587,4 @@ public class ATMInterface {
 		}
 
 	}
-
-
-
-
 }
