@@ -139,7 +139,8 @@ public class GUITerminal {
 							try {
 								if (correctPin(pinCode.getText())) {
 									currency = (String) val.getSelectedItem();
-									if(transaction())	{		
+									if(transaction())	{
+										System.out.println("QWR");
 											//запрос авторизации
 										/*	FrontOffice.usefulTimeOfCardChecking(getCardNum());
 											FrontOffice.moneyOnCardChecking(getCardNum(), getSum1());

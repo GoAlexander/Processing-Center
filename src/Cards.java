@@ -24,6 +24,7 @@ public class Cards {
     int type;
     boolean BL;
     int CVV;
+    double 
     Cards(){
     numberArr= new int[16]; 
     for(int i=0;i<numberArr.length;i++)

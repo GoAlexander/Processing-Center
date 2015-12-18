@@ -257,6 +257,7 @@ public static String toTranslit(String src) throws Exception
 			FileWriter writer = new FileWriter(outputFile, true);
                         writer.write(line);
                                 writer.close();
+                                jTextArea1.append("Ваша заявка принята");
         } catch (Exception ex) {
            {
                 jTextArea1.append(ex.getMessage());
