@@ -16,7 +16,7 @@ import javax.swing.JTextArea;
 
 public class GUITerminal {
 
-	private JFrame frame;
+	public JFrame frame;
 	private JTextField cardNum;
 	private JTextField pinCode;
 	private JTextField sum;
