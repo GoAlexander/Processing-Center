@@ -142,7 +142,7 @@ public static String commision(String cardNumber, String sum) {
 	public static SimpleDateFormat data = new SimpleDateFormat("yyyy/MM/dd");
 
 	public static int findRowUser(String numCard) throws IOException {
-		FileInputStream fis = new FileInputStream("../Processing-Center/excel/DB.xls");
+		FileInputStream fis = new FileInputStream("DB.xls");
 		Workbook wb = new HSSFWorkbook(fis);
 		int row = 0;
 		for (int i = 0;; i++) {
@@ -156,7 +156,7 @@ public static String commision(String cardNumber, String sum) {
 	}
 
 	public static int findColUser(String phrase) throws IOException {
-		FileInputStream fis = new FileInputStream("../Processing-Center/excel/DB.xls");
+		FileInputStream fis = new FileInputStream("DB.xls");
 		Workbook wb = new HSSFWorkbook(fis);
 		int col = 0;
 		for (int i = 0;; i++) {
@@ -171,7 +171,7 @@ public static String commision(String cardNumber, String sum) {
 
 	public static boolean cvvChecking(String numCard, String cvv) throws IOException {
 		try {
-			FileInputStream fis = new FileInputStream("../Processing-Center/excel/DB.xls");
+			FileInputStream fis = new FileInputStream("DB.xls");
 			Workbook wb = new HSSFWorkbook(fis);
 			int row = findRowUser(numCard);
 			int col = findColUser("CVV");
@@ -190,7 +190,7 @@ public static String commision(String cardNumber, String sum) {
 
 	public static boolean pinChecking(String numCard, String pinCode) throws IOException {
 		try {
-			FileInputStream fis = new FileInputStream("../Processing-Center/excel/DB.xls");
+			FileInputStream fis = new FileInputStream("DB.xls");
 			Workbook wb = new HSSFWorkbook(fis);
 			int row = findRowUser(numCard);
 			int col = findColUser("Пин код");
@@ -210,7 +210,7 @@ public static String commision(String cardNumber, String sum) {
 
 	public static boolean usefulTimeOfCardChecking(String numCard) throws IOException {
 		try {
-			FileInputStream fis = new FileInputStream("../Processing-Center/excel/DB.xls");
+			FileInputStream fis = new FileInputStream("DB.xls");
 			Workbook wb = new HSSFWorkbook(fis);
 			int row = findRowUser(numCard);
 			int col = findColUser("Срок карты");
@@ -250,7 +250,7 @@ public static String commision(String cardNumber, String sum) {
 
 	public static boolean moneyOnCardChecking(String numCard, String desireSum) throws IOException {
 		try {
-			FileInputStream fis = new FileInputStream("../Processing-Center/excel/DB.xls");
+			FileInputStream fis = new FileInputStream("DB.xls");
 			Workbook wb = new HSSFWorkbook(fis);
 			int row = findRowUser(numCard);
 			int col = findColUser("Остаток");
@@ -272,7 +272,7 @@ public static String commision(String cardNumber, String sum) {
 
 	public static boolean cardInStoplistChecking(String numCard, String device) throws IOException {//device:terminal or atm
 		try {
-			FileInputStream fis = new FileInputStream("../Processing-Center/excel/DB.xls");
+			FileInputStream fis = new FileInputStream("DB.xls");
 			Workbook wb = new HSSFWorkbook(fis);
 			int row = findRowUser(numCard);
 			int col = 0;
@@ -361,7 +361,7 @@ public static String commision(String cardNumber, String sum) {
 			s = s + "Not enough money on card. ";
 		if (a == -3)
 			s = s + "Your card is in the stoplist. ";
-                String output_File = "../Processing-Center/Бэк-офис/Данные авторизации.csv";
+                String output_File = "Данные авторизации.csv";
                  FileWriter writer = new FileWriter(output_File, true);
                  String lineIn=sum+";"+cardNum+";"+Fcvv+";"+stop_list+"\n";
                     writer.write(lineIn);
