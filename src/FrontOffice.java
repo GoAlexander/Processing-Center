@@ -8,25 +8,14 @@ import org.apache.poi.ss.usermodel.*;
 
 public class FrontOffice {
 	//structures 
-	//TODO правильно я сделал подобие структуры?
 	//"Структура" денег
-	class Sum { 
-		double sum; //Количество денег (к примеру 1000)
-		int type_of_money; //валюта //TODO договориться какая валюта - какой номер (в документацию)
-	}
-	
-	//"структура" юзера, здесь хранится вся инфа, которая должна храниться во Фронт Офисе
-	static class UserDataBase { //нужно немного отредактировать с учётом задания
-		//int pin;
-		//long deadline_of_card;
-		Sum oper_sum;
-		//boolean stop_listl; //0 -> in the stop list
-		//TODO что-то ещё?
-		String numCard;
-		String pinCode;
-		String desireSum;
-		int cvv;
-	} 
+
+	double sum; //Количество денег (к примеру 1000)
+	int type_of_money; //валюта
+	String numCard;
+	String pinCode;
+	int cvv;
+	boolean stop_list;
 	
 	//Купюры
 	static class Bond {
@@ -63,13 +52,15 @@ public class FrontOffice {
 	
 	//methods
 	//Расчёт комиссии (task #6) (+Backoffice!)
+	/*
 	Sum commissionComputing(Sum oper_sum, int type_of_commission){
 		return oper_sum;
 	}
 	//Конверсионная операция (task #7)
-	Sum sumConversion(/*double commission,*/ Sum oper_sum) { // TODO HIGH PRIORITY или вообще ничего на вход не нужно?
+	Sum sumConversion( Sum oper_sum) { // TODO HIGH PRIORITY или вообще ничего на вход не нужно?
 		return oper_sum; //см. преподаватель писал об этом (Email)
 	}
+	*/
 	
 	//Обработка транзакций (task #8)
 	//Transaction control. Begin.
