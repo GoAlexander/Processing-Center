@@ -147,6 +147,9 @@ public class GUITerminal {
 										//	FrontOffice.answerMessage(getCardNum(), getPin1(), (Converion.conv(getCurrType(), cur, getSum2())), "terminal");
 											
 											String s="";
+											int row = WorkWithExcel.findRowUser(getCardNum1());
+											double sum = Double.parseDouble(WorkWithExcel.getSum(row));
+											double newSum = 0;
 											int cur = Integer.parseInt(WorkWithExcel.getCur(row));
 											if (getCurrType() != cur)
 											s=s+ Double.toString(Converion.conv(getCurrType(), getCurrType(), getSum2()));
