@@ -145,8 +145,13 @@ public class GUITerminal {
 											FrontOffice.moneyOnCardChecking(getCardNum(), getSum1());
 											FrontOffice.cardInStoplistChecking(getCardNum(), "terminal");*/
 										//	FrontOffice.answerMessage(getCardNum(), getPin1(), (Converion.conv(getCurrType(), cur, getSum2())), "terminal");
+											
 											String s="";
+											int cur = Integer.parseInt(WorkWithExcel.getCur(row));
+											if (getCurrType() != cur)
 											s=s+ Double.toString(Converion.conv(getCurrType(), getCurrType(), getSum2()));
+											else
+											s=getSum1();
 											String answ = FrontOffice.answerMessage(getCardNum1(), getPin1(),s, "terminal");
 											printCheck(answ, res);
 										}
