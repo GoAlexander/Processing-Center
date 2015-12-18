@@ -135,7 +135,7 @@ public class GUITerminal {
 					// проверка на наличие букв
 					if (!(checkSymbols(cardNum)) && (!(checkSymbols(pinCode))) && (!(checkSymbols(sum)))) {
 
-						if (checkNum(cardNum) && checkPin(pinCode) && validation()) {
+						if (checkNum(cardNum) && checkPin(pinCode) && validation()) { 
 							try {
 								if (correctPin(pinCode.getText())) {
 									currency = (String) val.getSelectedItem();
