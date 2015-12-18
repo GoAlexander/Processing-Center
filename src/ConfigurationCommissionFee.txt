@@ -1,8 +1,0 @@
-
-public class ConfigurationCommissionFee {
-	String codeModelCommissionFee;
-	String codeATM;
-	String transaction;
-	String codeModelDataCommission;
-	
-}
