@@ -151,7 +151,7 @@ public class GUITerminal {
 											printCheck(res);
 										}
 										else{
-										printCheck(res);
+										printCheck(answ);
 										//+финансовое подтверждение в Бэк-оффис
 										}
 								} else {
@@ -295,10 +295,9 @@ public class GUITerminal {
 			return false;
 	}
 
-	private void printCheck(JTextArea a) {
+	private void printCheck(String a) {
 		if (transaction())
-			a.setText("Ваша транзакция на сумму " + sum.getText() + " " + val.getSelectedIndex()
-					+ " выполнена успешно\n");
+			res.setText(a);
 	}
 	public String getCurrency(){
 		return currency;
