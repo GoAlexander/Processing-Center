@@ -6,6 +6,8 @@ import javax.swing.JFormattedTextField;
 import javax.swing.text.MaskFormatter;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+
 import javax.swing.JOptionPane;
 public class WebsiteInterface extends javax.swing.JFrame {
     
@@ -55,20 +57,35 @@ public class WebsiteInterface extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 save(jTextField1.getText(),jTextField2.getText(),Month.getSelectedIndex(),Year.getSelectedIndex());
-                cvvChecking(cardnumber, cvv);
-                usefulTimeOfCardChecking(cardnumber);
+                try {
+					FrontOffice.cvvChecking(cardnumber, cvv);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+                try {
+					FrontOffice.usefulTimeOfCardChecking(cardnumber);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
                 
                 
-                if (cvvChecking(cardnumber, cvv) &&
-                    usefulTimeOfCardChecking(cardnumber))
-                {
-                    
-                    JOptionPane.showInputDialog(null, "Оплата завершена", JOptionPane.WARNING_MESSAGE);
-                } else  {
-                    
-                    JOptionPane.showInputDialog(null, "Оплата не удалась", JOptionPane.WARNING_MESSAGE);
-                    
-                }
+                try {
+					if ( FrontOffice.cvvChecking(cardnumber, cvv) &&
+							 FrontOffice.usefulTimeOfCardChecking(cardnumber))
+					{
+					    
+					    JOptionPane.showInputDialog(null, "Оплата завершена", JOptionPane.WARNING_MESSAGE);
+					} else  {
+					    
+					    JOptionPane.showInputDialog(null, "Оплата не удалась", JOptionPane.WARNING_MESSAGE);
+					    
+					}
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
             }
         });
         
