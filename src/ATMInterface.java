@@ -394,7 +394,7 @@ public class ATMInterface {
 			textAreaResult.setText(null);
 			textAreaResult.append(FrontOffice.answerMessage(inputNumberCard, input, money, "atm"));
 			
-			textAreaResult.append("Вы сняли наличные в размере:" + money + " " + comboBoxCurrency.getSelectedItem() + "\n");
+			textAreaResult.append("Вы сняли наличные в размере:" + money + " " + "RUB" + "\n");
 		 
 			textAreaResult.append("Баланс:" + "\n" + "\n");
 			printCheck("Снятие");
@@ -499,7 +499,7 @@ public class ATMInterface {
 
 		textAreaOutPut.append(dateFormat.format(currentDate) + "\n" + "\n");
 
-		textAreaOutPut.append("Сумма: " + textFieldSum.getText()+ " " + comboBoxCurrency.getSelectedItem() + "\n");
+		textAreaOutPut.append("Сумма: " + textFieldSum.getText()+ " " + "RUB" + "\n");
 
 		textAreaOutPut.append("Баланс карты:" /*+ String.valueOf(AccountingSystem.getBalance(inputNumberCard)*/ +"\n");
 		textAreaOutPut.append("Комиссия:" + "0 RUB" + "\n");
