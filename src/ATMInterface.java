@@ -385,6 +385,8 @@ public class ATMInterface {
 				
 			}
 			
+			try{	
+			
 			if(FrontOffice.transactionControl(inputNumberCard, input, money, "atm") == 1)
 			{
 				
@@ -397,17 +399,25 @@ public class ATMInterface {
 			textAreaResult.append("Баланс:" + "\n" + "\n");
 			printCheck("Снятие");
 			
+			
 			atmBonds =  FrontOffice.bondSelection(atmBonds, Integer.parseInt(money));
 			textAreaResult.append("Текущее состояние купюр в кассетах:" + "\n" );
 			
 			textAreaResult.append(atmBonds.toString());
-
 			}
 			else 
-			{
+			   {
 				textAreaResult.setText(null);
 				textAreaResult.append(FrontOffice.answerMessage(inputNumberCard, input, money, "atm"));
+			  }
 			}
+			catch(Exception e)
+			{
+				
+				textAreaResult.append("В кассетах недостаточно купюр!" + "\n" );
+			}
+			
+
 
 			
 		}
