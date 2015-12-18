@@ -1,0 +1,241 @@
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+public class Comission {
+	static void diapason(long cardNumber, Diapason b) throws IOException {
+
+		String cardN = cardNumber + "";
+		String cardNumb = cardN.substring(6, 9);
+		b.diapasonCard = Integer.parseInt(cardNumb);
+		
+		try {
+                       
+			FileInputStream fin = new FileInputStream(
+					"../ProcCenter/src/DiapasonCard.txt");
+
+			BufferedReader br = new BufferedReader(new InputStreamReader(fin));
+
+			while (true) {
+				System.out.println("br=" + br);
+				String string = br.readLine();
+				System.out.println("string" + string);
+				String s = string.substring(0, string.indexOf(";"));
+				String first = s.substring(0, string.indexOf("-"));
+				String last = s.substring(5, 9);
+				System.out.println("first " + first + " last " + last);
+				long one = (long) Integer.parseInt(first);
+				long two = (long) Integer.parseInt(last);
+				if (b.diapasonCard >= one && b.diapasonCard <= two) {*/
+					b.codeBank = string.substring(10, 13);
+					System.out.println("Код банка" + b.codeBank);
+					b.codeModelCommissionFee = string.substring(13, 16);
+					System.out.println("Код модели комиссии"
+							+ b.codeModelCommissionFee);
+					break;
+				}
+
+			}
+			fin.close();
+
+		} catch (FileNotFoundException e) {
+
+			System.out.println("Ошибкадоступакфайлу" + e);
+		}
+
+		
+	}
+
+	public static void description(Diapason b) throws IOException {
+		ModelCommissionFee d = new ModelCommissionFee();
+
+		try {
+
+			FileInputStream fin = new FileInputStream(
+					"../ProcCenter/src/ModelCommissionFee.txt");
+
+			BufferedReader br = new BufferedReader(new InputStreamReader(fin));
+
+			while (true) {
+				System.out.println("br=" + br);
+				String string = br.readLine();
+				System.out.println("string" + string);
+				d.codeModelCommissionFee = string.substring(0,
+						string.indexOf(";"));
+				System.out.println("Код_модели комиссии(d)"
+						+ d.codeModelCommissionFee);
+				if (d.codeModelCommissionFee.equals(b.codeModelCommissionFee)) {
+					d.descriptionModel = string.substring(string.indexOf(";"));
+					System.out.println("Описание_модели(d)"
+							+ d.descriptionModel);
+
+					break;
+				}
+
+			}
+			fin.close();
+
+		} catch (FileNotFoundException e) {
+
+			System.out.println("Ошибкадоступакфайлу" + e);
+		}
+
+		
+	}
+
+	public static void configuration(Diapason b,
+			ConfigurationCommissionFee c,String codeATM, String transaction)
+			throws IOException {
+
+		
+		try {
+
+			FileInputStream fin = new FileInputStream(
+					"../ProcCenter/src/ConfigurationCommissiomFee.txt");
+
+			BufferedReader br = new BufferedReader(new InputStreamReader(fin));
+
+			while (true) {
+				
+				String string = br.readLine();
+				System.out.println("string" + string);
+				c.codeModelCommissionFee = string.substring(0,
+						string.indexOf(";"));
+				System.out.println("Код_модели комиссии(c)"
+						+ c.codeModelCommissionFee);
+				if (c.codeModelCommissionFee.equals(b.codeModelCommissionFee)) {
+					  	c.codeATM = string.substring(4);
+							System.out.println("Код_ATM " + c.codeATM);
+							System.out.println("codeATM " + codeATM);
+							if (c.codeATM.equals(codeATM)) {
+								c.transaction = string.substring(6,
+										string.lastIndexOf(";"));
+								System.out.println("Вид_операции "
+										+ c.transaction);
+
+								if (c.transaction.equals(transaction)) {
+									c.codeModelDataCommission = string
+											.substring(string.lastIndexOf(";"));
+									System.out
+											.println("Код_модели_значений_комиссии"
+													+ c.codeModelDataCommission);
+
+									break;
+								}
+							}
+							
+						}
+						
+					}
+					
+
+					
+				
+
+			
+			fin.close();
+
+		} catch (FileNotFoundException e) {
+
+			System.out.println("Ошибкадоступакфайлу" + e);
+		}
+
+		
+	}
+
+	public static void dataCommision(ConfigurationCommissionFee c,
+			ModelDataCommision e) throws IOException {
+		
+		try {
+
+			FileInputStream fin = new FileInputStream(
+					"../ProcCenter/src/ModelDataCommision.txt");
+
+			BufferedReader br = new BufferedReader(new InputStreamReader(fin));
+
+			while (true) {
+				System.out.println("br=" + br);
+				String string = br.readLine();
+				System.out.println("string" + string);
+				e.codeModelDataCommission = string.substring(0,
+						string.indexOf(";"));
+				System.out.println("Код_модели комиссии(e)"
+						+ e.codeModelDataCommission);
+				if (e.codeModelDataCommission.equals(c.codeModelDataCommission)) {
+					String[] buf = string.split("\\;");
+					
+					e.currency = buf[1];
+					System.out.println("Валюта " + e.currency);
+					String percent = buf[2];
+					e.percent = Integer.parseInt(percent);
+					System.out.println("%=" + e.percent);
+					String steadyComponent = buf[3];
+					e.steadyComponent = Integer.parseInt(steadyComponent);
+					System.out.println("steadyComponent " + e.steadyComponent);
+					String min = buf[4];
+					e.min = Integer.parseInt(min);
+					System.out.println("min" + e.min);
+					String max = buf[5];
+					e.max = Integer.parseInt(max);
+					System.out.println("max" + e.max);
+
+					break;
+				}
+
+			}
+			fin.close();
+
+		} catch (FileNotFoundException r) {
+
+			System.out.println("Ошибкадоступакфайлу" + r);
+		}
+
+	}
+
+	public static double commision(ModelDataCommision e, double sum) {
+		double com = 0;
+		if (e.min == 0 && e.max == 0) {
+			com = sum * (e.percent * 0.01) + e.steadyComponent;
+		}
+		if (e.min == 0 && e.max != 0) {
+			com = sum * (e.percent * 0.01) + e.steadyComponent;
+			if (com < e.max) {
+				return com;
+			} else {
+				return e.max;
+			}
+		}
+		if (e.min != 0 && e.max == 0) {
+			com = sum * (e.percent * 0.01) + e.steadyComponent;
+			if (com < e.min) {
+				return e.min;
+			} else {
+				return com;
+			}
+		}
+
+		if (e.min != 0 && e.max != 0) {
+			com = sum * (e.percent * 0.01) + e.steadyComponent;
+			if (e.min < com && com < e.max) {
+				System.out.println("<com<");
+				return com;
+			} else {
+				if (com < e.min) {
+					System.out.println("com<");
+					System.out.println("e.min" + e.min);
+					return e.min;
+				}
+				if (com > e.max) {
+					System.out.println("<com");
+					System.out.println("e.max" + e.max);
+					return e.max;
+
+				}
+			}
+		}
+		return -1;
+
+	}
+}
