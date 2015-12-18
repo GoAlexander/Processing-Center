@@ -6,6 +6,7 @@ import javax.swing.JFormattedTextField;
 import javax.swing.text.MaskFormatter;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
 public class WebsiteInterface extends javax.swing.JFrame {
     
     /**
@@ -30,7 +31,7 @@ public class WebsiteInterface extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JFormattedTextField(new MaskFormatter("#### #### #### ####"));
         jLabel2 = new javax.swing.JLabel();
-        //  jRadioButton1 = new javax.swing.JRadioButton();
+        //  jRadioButton1 = new javax .swing.JRadioButton();
         // jRadioButton2 = new javax.swing.JRadioButton();
         jTextField2 = new javax.swing.JFormattedTextField(new MaskFormatter("###"));
         jLabel3 = new javax.swing.JLabel();
@@ -53,6 +54,20 @@ public class WebsiteInterface extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 save(jTextField1.getText(),jTextField2.getText(),Month.getSelectedIndex(),Year.getSelectedIndex());
+                cvvChecking(cardnumber, cvv);
+                usefulTimeOfCardChecking(cardnumber);
+                moneyOnCardChecking(cardnumber, s);
+                
+                if (cvvChecking(cardnumber, cvv) &&
+                    usefulTimeOfCardChecking(cardnumber)
+                    moneyOnCardChecking(cardnumber, s)) {
+                    
+                    JOptionPane.showMessageDialog(null, "Оплата завершена", JOptionPane.WARNING_MESSAGE);
+                } else  {
+                    
+                    JOptionPane.showMessageDialog(null, "Оплата не удалась", JOptionPane.WARNING_MESSAGE);
+                    
+                }
             }
         });
         
@@ -215,8 +230,7 @@ public class WebsiteInterface extends javax.swing.JFrame {
                 }
             }
         });
-        cvvChecking(cardnumber, cvv);
-        usefulTimeOfCardChecking(cardnumber);
-        moneyOnCardChecking(cardnumber, s);
+        
+        
     }
 }
