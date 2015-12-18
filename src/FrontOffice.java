@@ -1,4 +1,5 @@
 ﻿import java.io.FileInputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -33,7 +34,7 @@ public class FrontOffice {
 		public String toString() {
 			String s = new String();
 			for (int j = denomination.length - 1; j >= 0; j--)
-				s = s + ("Code " + code[j] + "; result: " + result[j] + '\n');
+				s = s + ("Номер кассеты: " + code[j] + "; купюр выдано: " + result[j] + '\n');
 			return s;
 		}
 	}
@@ -50,14 +51,15 @@ public class FrontOffice {
 	
 	//methods
 	//Расчёт комиссии (task #6) (+Backoffice!)
-public static string commision(string cardNumber, string sum,) {
-		double com = 0;
+public static String commision(String cardNumber, String sum) {
+		int com = 0;
                 int min;
                 int max;
                 int percentage;
                 String cardN = cardNumber + "";
 		String cardNumb = cardN.substring(6, 9);
                 int diapasonCard = Integer.parseInt(cardNumb);
+                int sum = Integer.parseInt(sum);
                 if(diapasonCard >=1000 && diapasonCard <= 3000)
                  {  
                   percentage=1;
@@ -74,25 +76,25 @@ public static string commision(string cardNumber, string sum,) {
                   {
                     percentage=3;
                     min=0;
-                    max==0;
+                    max=0;
                   }
                  if(diapasonCard >=7001 && diapasonCard <= 9000)
                   {
                     percentage=4;
                     min=12;
-                    max==100;
+                    max=100;
                   }
                  if(diapasonCard >=9001 && diapasonCard <= 9999)
                   {
                     percentage=5;
-                    min==10;
-                    max==100;
+                    min=10;
+                    max=100;
                   }
 		if (min == 0 && max == 0) {
-			com = sum * (percent * 0.01);
+			com = sum * (percentage * 0.01);
 		}
 		if (min == 0 && max != 0) {
-			com = sum * (percent * 0.01);
+			com = sum * (percentage * 0.01);
 			if (com < max) {
 				com=com;
 			} else {
@@ -100,7 +102,7 @@ public static string commision(string cardNumber, string sum,) {
 			}
 		}
 		if (min != 0 && max == 0) {
-			com = sum * (percent * 0.01);
+			com = sum * (percentage * 0.01);
 			if (com < min) {
 				com=min;
 			} else {
@@ -109,7 +111,7 @@ public static string commision(string cardNumber, string sum,) {
 		}
 
 		if (min != 0 && max != 0) {
-			com = sum * (percent * 0.01);
+			com = sum * (percentage * 0.01);
 			if (min < com && com < max) {
 				com=com;
 			} else {
@@ -140,7 +142,7 @@ public static string commision(string cardNumber, string sum,) {
 	public static SimpleDateFormat data = new SimpleDateFormat("yyyy/MM/dd");
 
 	public static int findRowUser(String numCard) throws IOException {
-		FileInputStream fis = new FileInputStream("../Processing-Center/excel/DB.xls");
+		FileInputStream fis = new FileInputStream("DB.xls");
 		Workbook wb = new HSSFWorkbook(fis);
 		int row = 0;
 		for (int i = 0;; i++) {
@@ -154,7 +156,7 @@ public static string commision(string cardNumber, string sum,) {
 	}
 
 	public static int findColUser(String phrase) throws IOException {
-		FileInputStream fis = new FileInputStream("../Processing-Center/excel/DB.xls");
+		FileInputStream fis = new FileInputStream("DB.xls");
 		Workbook wb = new HSSFWorkbook(fis);
 		int col = 0;
 		for (int i = 0;; i++) {
@@ -169,7 +171,7 @@ public static string commision(string cardNumber, string sum,) {
 
 	public static boolean cvvChecking(String numCard, String cvv) throws IOException {
 		try {
-			FileInputStream fis = new FileInputStream("../Processing-Center/excel/DB.xls");
+			FileInputStream fis = new FileInputStream("DB.xls");
 			Workbook wb = new HSSFWorkbook(fis);
 			int row = findRowUser(numCard);
 			int col = findColUser("CVV");
@@ -188,7 +190,7 @@ public static string commision(string cardNumber, string sum,) {
 
 	public static boolean pinChecking(String numCard, String pinCode) throws IOException {
 		try {
-			FileInputStream fis = new FileInputStream("../Processing-Center/excel/DB.xls");
+			FileInputStream fis = new FileInputStream("DB.xls");
 			Workbook wb = new HSSFWorkbook(fis);
 			int row = findRowUser(numCard);
 			int col = findColUser("Пин код");
@@ -208,7 +210,7 @@ public static string commision(string cardNumber, string sum,) {
 
 	public static boolean usefulTimeOfCardChecking(String numCard) throws IOException {
 		try {
-			FileInputStream fis = new FileInputStream("../Processing-Center/excel/DB.xls");
+			FileInputStream fis = new FileInputStream("DB.xls");
 			Workbook wb = new HSSFWorkbook(fis);
 			int row = findRowUser(numCard);
 			int col = findColUser("Срок карты");
@@ -248,7 +250,7 @@ public static string commision(string cardNumber, string sum,) {
 
 	public static boolean moneyOnCardChecking(String numCard, String desireSum) throws IOException {
 		try {
-			FileInputStream fis = new FileInputStream("../Processing-Center/excel/DB.xls");
+			FileInputStream fis = new FileInputStream("DB.xls");
 			Workbook wb = new HSSFWorkbook(fis);
 			int row = findRowUser(numCard);
 			int col = findColUser("Остаток");
@@ -270,7 +272,7 @@ public static string commision(string cardNumber, string sum,) {
 
 	public static boolean cardInStoplistChecking(String numCard, String device) throws IOException {//device:terminal or atm
 		try {
-			FileInputStream fis = new FileInputStream("../Processing-Center/excel/DB.xls");
+			FileInputStream fis = new FileInputStream("DB.xls");
 			Workbook wb = new HSSFWorkbook(fis);
 			int row = findRowUser(numCard);
 			int col = 0;
@@ -359,7 +361,12 @@ public static string commision(string cardNumber, string sum,) {
 			s = s + "Not enough money on card. ";
 		if (a == -3)
 			s = s + "Your card is in the stoplist. ";
+                String output_File = "Данные авторизации.csv";
+                 FileWriter writer = new FileWriter(output_File, true);
+                 String lineIn=sum+";"+cardNum+";"+Fcvv+";"+stop_list+"\n";
+                    writer.write(lineIn);
 		return s;
+               
 	}
 
 	public static String answerMessage(String numCard, String pinCode, String desireSum, String device, String cvv)

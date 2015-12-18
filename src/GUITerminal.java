@@ -144,11 +144,15 @@ public class GUITerminal {
 										/*	FrontOffice.usefulTimeOfCardChecking(getCardNum());
 											FrontOffice.moneyOnCardChecking(getCardNum(), getSum1());
 											FrontOffice.cardInStoplistChecking(getCardNum(), "terminal");*/
-											//FrontOffice.answerMessage(getCardNum(), getPin1(), getSum1(), "terminal");
-											printCheck(res);
+										//	FrontOffice.answerMessage(getCardNum(), getPin1(), (Converion.conv(getCurrType(), cur, getSum2())), "terminal");
+											String s="";
+											s=s+ Double.toString(Converion.conv(getCurrType(), getCurrType(), getSum2()));
+											String answ = FrontOffice.answerMessage(getCardNum1(), getPin1(),s, "terminal");
+											printCheck(answ, res);
 										}
 										else{
-										printCheck(res);
+										res.setText("Транзакция не может быть совершена.");
+									
 										//+финансовое подтверждение в Бэк-оффис
 										}
 								} else {
@@ -292,10 +296,9 @@ public class GUITerminal {
 			return false;
 	}
 
-	private void printCheck(JTextArea a) {
+	private void printCheck(String a, JTextArea b) {
 		if (transaction())
-			a.setText("Ваша транзакция на сумму " + sum.getText() + " " + val.getSelectedIndex()
-					+ " выполнена успешно\n");
+			b.setText(a);
 	}
 	public String getCurrency(){
 		return currency;

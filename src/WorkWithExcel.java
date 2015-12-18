@@ -16,13 +16,13 @@ public class WorkWithExcel {
 	public static void writeIntoExcel(String number, int Cardtype, int CurrType, double limit,
 			int counter) throws FileNotFoundException, IOException {
 
-		FileInputStream file1 = new FileInputStream(new File("../Processing-Center/excel/TerminalDB.xls"));
+		FileInputStream file1 = new FileInputStream(new File("TerminalDB.xls"));
 		Workbook book = new HSSFWorkbook(file1);
 
 		book.removeSheetAt(0);
 		Sheet sheet = book.createSheet();		
 
-		FileInputStream fis = new FileInputStream("../Processing-Center/excel/TerminalDB.xls");
+		FileInputStream fis = new FileInputStream("TerminalDB.xls");
 		Workbook wb = new HSSFWorkbook(fis);
 		
 		Cell existingCell;
@@ -51,7 +51,7 @@ public class WorkWithExcel {
 		newCell2.setCellValue(limit);			
 		newCell3.setCellValue(CurrType);
 		
-		FileOutputStream out = new FileOutputStream("../Processing-Center/excel/TerminalDB.xls");
+		FileOutputStream out = new FileOutputStream("TerminalDB.xls");
 		book.write(out);
 		out.close();
 		fis.close();
@@ -59,7 +59,7 @@ public class WorkWithExcel {
 	}
 
 	public static void readFromExcel(int counter) throws IOException {
-		FileInputStream fis = new FileInputStream("../Processing-Center/excel/TerminalDB.xls");
+		FileInputStream fis = new FileInputStream("TerminalDB.xls");
 		HSSFWorkbook wb = new HSSFWorkbook(fis);
 		for(int i = 0; i < counter; i++){
 		System.out.println("QWE " + wb.getSheetAt(0).getRow(i).getCell(0));
@@ -84,7 +84,7 @@ public class WorkWithExcel {
 	}
 	
 	public static int findRowUser(String numCard) throws IOException {
-		FileInputStream fis = new FileInputStream("../Processing-Center/excel/TerminalDB.xls");
+		FileInputStream fis = new FileInputStream("TerminalDB.xls");
 		Workbook wb = new HSSFWorkbook(fis);
 		int row = 0;
 		for (int i = 0;; i++) {
@@ -101,7 +101,7 @@ public class WorkWithExcel {
 		String res="";
 		FileInputStream fis;
 		try {
-			fis = new FileInputStream("../Processing-Center/excel/TerminalDB.xls");
+			fis = new FileInputStream("TerminalDB.xls");
 			Workbook wb = new HSSFWorkbook(fis);		
 			res=getCellText(wb.getSheetAt(0).getRow(rowNumber).getCell(2));
 			fis.close();
@@ -116,7 +116,7 @@ public static String getCur(int rowNumber) throws IOException{
 		String res="";
 		FileInputStream fis;
 		try {
-			fis = new FileInputStream("../Processing-Center/excel/TerminalDB.xls");
+			fis = new FileInputStream("TerminalDB.xls");
 			Workbook wb = new HSSFWorkbook(fis);		
 			res=getCellText(wb.getSheetAt(0).getRow(rowNumber).getCell(3));
 			fis.close();
