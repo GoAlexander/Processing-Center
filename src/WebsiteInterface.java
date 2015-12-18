@@ -42,6 +42,7 @@ public class WebsiteInterface extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         Random sum= new Random();
         int s=sum.nextInt(2000);
+        Integer.toString(s);
         
         // edt = new JFormattedTextField(new MaskFormatter("###.##"));
         //  jTextField1 = new JFormattedTextField(new MaskFormatter("###.##"));
@@ -56,11 +57,11 @@ public class WebsiteInterface extends javax.swing.JFrame {
                 save(jTextField1.getText(),jTextField2.getText(),Month.getSelectedIndex(),Year.getSelectedIndex());
                 cvvChecking(cardnumber, cvv);
                 usefulTimeOfCardChecking(cardnumber);
-                moneyOnCardChecking(cardnumber, s);
+                
                 
                 if (cvvChecking(cardnumber, cvv) &&
-                    usefulTimeOfCardChecking(cardnumber)
-                    moneyOnCardChecking(cardnumber, s)) {
+                    usefulTimeOfCardChecking(cardnumber))
+                {
                     
                     JOptionPane.showMessageDialog(null, "Оплата завершена", JOptionPane.WARNING_MESSAGE);
                 } else  {
@@ -162,9 +163,15 @@ public class WebsiteInterface extends javax.swing.JFrame {
         
         pack();
     }// </editor-fold>
+    
+    public void summ(){
+        Random sum= new Random();
+        int s=sum.nextInt(2000);
+        Integer.toString(s);
+    }
     public void save(String text,String text1,int mnth,int ye) {
-        cardnumber = Integer.parseInt(text);
-        cvv = Integer.parseInt(text1);
+        cardnumber = text;
+        cvv = text1;
         month=mnth;
         year=ye;
         
@@ -190,8 +197,8 @@ public class WebsiteInterface extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField jTextField2;
     //  private javax.swing.JFormattedTextField jTextField3;
     // End of variables declaration
-    public int cardnumber;
-    public int cvv;
+    public String cardnumber;
+    public String cvv;
     public int month;
     public int year;
     
