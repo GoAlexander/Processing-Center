@@ -9,9 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 
-import FrontOffice.UserDataBase;
-import FrontOffice.java;
-import Converion.java;
+
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JTextArea;
@@ -138,26 +136,31 @@ public class GUITerminal {
 					if (!(checkSymbols(cardNum)) && (!(checkSymbols(pinCode))) && (!(checkSymbols(sum)))) {
 
 						if (checkNum(cardNum) && checkPin(pinCode) && validation()) {
-							if (correctPin(pinCode.getText())) {
-								currency = (String) val.getSelectedItem();
-								if(transaction())	{		
-										//запрос авторизации
-									/*	FrontOffice.usefulTimeOfCardChecking(getCardNum());
-										FrontOffice.moneyOnCardChecking(getCardNum(), getSum1());
-										FrontOffice.cardInStoplistChecking(getCardNum(), "terminal");*/
-										//FrontOffice.answerMessage(getCardNum(), getPin1(), getSum1(), "terminal");
+							try {
+								if (correctPin(pinCode.getText())) {
+									currency = (String) val.getSelectedItem();
+									if(transaction())	{		
+											//запрос авторизации
+										/*	FrontOffice.usefulTimeOfCardChecking(getCardNum());
+											FrontOffice.moneyOnCardChecking(getCardNum(), getSum1());
+											FrontOffice.cardInStoplistChecking(getCardNum(), "terminal");*/
+											//FrontOffice.answerMessage(getCardNum(), getPin1(), getSum1(), "terminal");
+											printCheck(res);
+										}
+										else{
 										printCheck(res);
-									}
-									else{
-									printCheck(res);
-									//+финансовое подтверждение в Бэк-оффис
-									}
-							} else {
-								counter--;
-								res.setText("PIN-код введен неверно");
-								if(counter == 0)
-									res.setText("PIN-код введен неверно 3 раза. Ваша карта заблокирована");
-									//добавить карту в стоп-лист
+										//+финансовое подтверждение в Бэк-оффис
+										}
+								} else {
+									counter--;
+									res.setText("PIN-код введен неверно");
+									if(counter == 0)
+										res.setText("PIN-код введен неверно 3 раза. Ваша карта заблокирована");
+										//добавить карту в стоп-лист
+								}
+							} catch (IOException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
 							}
 						}}
 					}
@@ -215,7 +218,7 @@ public class GUITerminal {
 		}
 	}
 
-	private boolean correctPin(String a) {// делает Ксюша
+	private boolean correctPin(String a) throws IOException {// делает Ксюша
 	int counter = 0;
 		boolean pinCorrect = false;
 		if (FrontOffice.pinChecking(getCardNum1(), getPin1())) {
