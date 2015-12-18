@@ -25,7 +25,17 @@ public class main {
 				WebsiteInterface.main(args);
 			}
 			else if (menu==2) {
-				System.out.println("<PaymentTerminal> is not implemented yet.");				
+				//System.out.println("<PaymentTerminal> is not implemented yet.");
+				EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					GUITerminal window = new GUITerminal();
+					window.frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
 			}
 			else if (menu==3) {
 				
