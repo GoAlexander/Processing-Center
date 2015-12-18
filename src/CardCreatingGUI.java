@@ -9,6 +9,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 import java.nio.file.Paths;
+import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -112,55 +113,63 @@ public final class CardCreatingGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-  String line;
-        Path outputFile = Paths
-
-				.get("Заявки.csv");
-        InputStream in;
-        try {
-            in = Files.newInputStream(outputFile);
-       
-
-				BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-                                while ((line = reader.readLine()) != null){
-        Random r=new Random();
-                        Cards temp=new Cards();
-                        temp.Name=line.split(";")[0];
-                        temp.limit=Integer.parseInt(line.split(";")[1]);
-                        temp.cur=Integer.parseInt(line.split(";")[2]);
-                        temp.pin=r.nextInt(8999)+1000;
-                        temp.type=Integer.parseInt(line.split(";")[3]);
-                        temp.CVV=r.nextInt(899)+100;
-                        temp.numberArr[8]=(temp.cur+1)*3;
-                        temp.numberArr[9]=(temp.type)*2;
-                        temp.numberArr[10]=r.nextInt(10);
-                        temp.numberArr[11]=r.nextInt(10);
-                        temp.numberArr[12]=r.nextInt(10);
-                        temp.numberArr[13]=r.nextInt(10);
-                        temp.numberArr[14]=r.nextInt(10);
-                        try {
-                            temp.numberArr[15]=temp.findMoon();
-                        } catch (Exception ex) {
-                            System.out.println("Err");
-                        }
-                        temp.calculateNumber();  
-   SimpleDateFormat data = new SimpleDateFormat("yyyy/MM");
-                           String lineIn=temp.Name+";"+temp.limit+";"+temp.cur+";"+temp.pin+";"+temp.type+";"+temp.number+";"+temp.BL+";"+temp.CVV+";"+data.format(temp.data)+"\n";
-                       String output_File = "Карты.csv";
-			FileWriter writer = new FileWriter(output_File, true);
-                        writer.write(lineIn);
-                                writer.close();
-            BufferedWriter writerDel = Files.newBufferedWriter(outputFile);
-            writerDel.close();
-            System.out.println(getCards().get(0).Name);
-        this.hide();
-                                }
-                         } catch (IOException ex) {
+        try {                                         
+            AccountingSystem ac = new AccountingSystem();
+           
+            String line;
+            Path outputFile = Paths
+                    
+                    .get("Заявки.csv");
+            InputStream in;
+            try {
+                in = Files.newInputStream(outputFile);
+                
+                
+                BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+                while ((line = reader.readLine()) != null){
+                    Random r=new Random();
+                    Cards temp=new Cards();
+                    temp.Name=line.split(";")[0];
+                    temp.limit=Integer.parseInt(line.split(";")[1]);
+                    temp.cur=Integer.parseInt(line.split(";")[2]);
+                    temp.pin=r.nextInt(8999)+1000;
+                    temp.type=Integer.parseInt(line.split(";")[3]);
+                    temp.CVV=r.nextInt(899)+100;
+                    temp.numberArr[8]=(temp.cur+1)*3;
+                    temp.numberArr[9]=(temp.type)*2;
+                    temp.numberArr[10]=r.nextInt(10);
+                    temp.numberArr[11]=r.nextInt(10);
+                    temp.numberArr[12]=r.nextInt(10);
+                    temp.numberArr[13]=r.nextInt(10);
+                    temp.numberArr[14]=r.nextInt(10);
+                    try {
+                        temp.numberArr[15]=temp.findMoon();
+                    } catch (Exception ex) {
+                        System.out.println("Err");
+                    }
+                    temp.calculateNumber();
+                    SimpleDateFormat data = new SimpleDateFormat("yyyy/MM");
+                     ac.addCard(temp.number, 5000);
+                    String lineIn=temp.Name+";"+temp.limit+";"+temp.cur+";"+temp.pin+";"+temp.type+";"+temp.number+";"+temp.BL+";"+temp.CVV+";"+data.format(temp.data)+"\n";
+                    String output_File = "Карты.csv";
+                    FileWriter writer = new FileWriter(output_File, true);
+                    writer.write(lineIn);
+                    writer.close();
+                    BufferedWriter writerDel = Files.newBufferedWriter(outputFile);
+                    writerDel.close();
+                    System.out.println(getCards().get(0).Name);
+                    this.hide();
+                }
+            } catch (IOException ex) {
+                Logger.getLogger(CardCreatingGUI.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ParseException ex) {
+                Logger.getLogger(CardCreatingGUI.class.getName()).log(Level.SEVERE, null, ex);
+            }// TO// TO
+            
+        } catch (SQLException ex) {
             Logger.getLogger(CardCreatingGUI.class.getName()).log(Level.SEVERE, null, ex);                  
-        } catch (ParseException ex) {
-            Logger.getLogger(CardCreatingGUI.class.getName()).log(Level.SEVERE, null, ex);
         }// TO// TO
-       
+       this.hide();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
