@@ -10,10 +10,10 @@ public class FrontOffice {
 	//structures 
 	//"Структура" денег
 
-	double sum = 0; //Количество денег (к примеру 1000)
-	String cardNum = "";
-	int Fcvv = 0;
-	boolean stop_list = false;
+	static double sum = 0; //Количество денег (к примеру 1000)
+	static String cardNum = "";
+	static int Fcvv = 0;
+	static boolean stop_list = false;
 	
 	//Купюры
 	static class Bond {
