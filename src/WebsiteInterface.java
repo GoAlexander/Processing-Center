@@ -55,12 +55,12 @@ public class WebsiteInterface extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 save(jTextField1.getText(),jTextField2.getText(),Month.getSelectedIndex(),Year.getSelectedIndex());
-                cvvChecking(cardnumber, cvv);
-                usefulTimeOfCardChecking(cardnumber);
+                FrontOffice.cvvChecking(cardnumber, cvv);
+                FrontOffice.usefulTimeOfCardChecking(cardnumber);
                 
                 
-                if (cvvChecking(cardnumber, cvv) &&
-                    usefulTimeOfCardChecking(cardnumber))
+                if (FrontOffice.cvvChecking(cardnumber, cvv) &&
+                		FrontOffice.usefulTimeOfCardChecking(cardnumber))
                 {
                     
                     JOptionPane.showMessageDialog(null, "Оплата завершена", JOptionPane.WARNING_MESSAGE);
