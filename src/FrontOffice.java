@@ -357,10 +357,10 @@ public class FrontOffice {
 			s = s + "Not enough money on card. ";
 		if (a == -3)
 			s = s + "Your card is in the stoplist. ";
-                String output_File = "Данные авторизации.csv";
+                /*String output_File = "Данные авторизации.csv";
                  FileWriter writer = new FileWriter(output_File, true);
                  String lineIn=sum+";"+cardNum+";"+Fcvv+";"+stop_list+"\n";
-                    writer.write(lineIn);
+                    writer.write(lineIn);*/
 		return s;
                
 	}
@@ -368,7 +368,7 @@ public class FrontOffice {
 	public static String answerMessage(String numCard, String pinCode, String desireSum, String device, String cvv)
 			throws IOException {
 		String s = new String();
-		int a = transactionControl(numCard, pinCode, desireSum, device);
+		int a = transactionControl(numCard, pinCode, desireSum, device, cvv);
 		if (a == 1)
 			return "Authorization completed. ";
 		if (a == 0)
