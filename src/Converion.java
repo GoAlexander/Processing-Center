@@ -25,4 +25,19 @@ public class Converion {
 		}
 		return 0;
 	}
+
+public static int convInt(int typeFrom, double transaction) {
+		// 1-dollar, 2-euro
+		double dollar_exchange_rate = 70.9320471;
+		double euro_exchange_rate = 76.6420769;
+		if (typeFrom == 1) {
+			double result = conv(2, 1, transaction) / 10;
+			return (int) result;
+		}
+		if (typeFrom == 2) {
+			double result = conv(3, 1, transaction) / 10;
+			return (int) result;
+		}
+		return 0;
+	}
 }
