@@ -144,7 +144,10 @@ public class GUITerminal {
 										/*	FrontOffice.usefulTimeOfCardChecking(getCardNum());
 											FrontOffice.moneyOnCardChecking(getCardNum(), getSum1());
 											FrontOffice.cardInStoplistChecking(getCardNum(), "terminal");*/
-											//FrontOffice.answerMessage(getCardNum(), getPin1(), getSum1(), "terminal");
+										//	FrontOffice.answerMessage(getCardNum(), getPin1(), (Converion.conv(getCurrType(), cur, getSum2())), "terminal");
+											String s="";
+											s=s+ Double.toString(Converion.conv(getCurrType(), getCurrType(), getSum2()));
+											String answ = UserDataBase.answerMessage(getCardNum1(), getPin1(),s, "terminal");
 											printCheck(res);
 										}
 										else{
