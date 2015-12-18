@@ -47,7 +47,7 @@ public class ATMInterface {
 	public  JComboBox comboBoxCurrency;
 
 	public  JPasswordField passwordField;
-	public  JButton enterButton, clearButton, zeroButton, buttonSuccess;
+	public  JButton enterButton, clearButton, zeroButton, buttonSuccess,  btnDrawOperation;
 
 	public JButton btnCashOperation, btnBalance, buttonClear;
 
@@ -126,11 +126,13 @@ public class ATMInterface {
 		panelOperations.add(textFieldSum);
 		textFieldSum.setColumns(10);
 
-		btnCashOperation = new JButton(
-				"\u0412\u043D\u0435\u0441\u0435\u043D\u0438\u0435 \u043D\u0430\u043B\u0438\u0447\u043D\u044B\u0445");
-		btnCashOperation.setBounds(25, 313, 180, 37);
-		panelOperations.add(btnCashOperation);
-		btnCashOperation.addActionListener(new CashListener());
+		btnDrawOperation = new JButton(
+				"\u0421\u043D\u044F\u0442\u0438\u0435 \u043D\u0430\u043B\u0438\u0447\u043D\u044B\u0445");
+		btnDrawOperation.setBounds(25, 313, 175, 37);
+
+		panelOperations.add(btnDrawOperation);
+		btnDrawOperation.addActionListener(new DrawListener());
+
 
 		JLabel label_Result = new JLabel("\u0420\u0435\u0437\u0443\u043B\u044C\u0442\u0430\u0442:");
 		label_Result.setBounds(225, 139, 135, 14);
@@ -388,7 +390,7 @@ public class ATMInterface {
 				
 				
 			textAreaResult.setText(null);
-			textAreaResult.append(FrontOffice.String answerMessage(inputNumberCard, input, money, "atm"));
+			textAreaResult.append(FrontOffice.answerMessage(inputNumberCard, input, money, "atm"));
 			
 			textAreaResult.append("Вы сняли наличные в размере:" + money + " " + comboBoxCurrency.getSelectedItem() + "\n");
 		 
@@ -404,7 +406,7 @@ public class ATMInterface {
 			else 
 			{
 				textAreaResult.setText(null);
-				textAreaResult.append(FrontOffice.String answerMessage(inputNumberCard, input, money, "atm"));
+				textAreaResult.append(FrontOffice.answerMessage(inputNumberCard, input, money, "atm"));
 			}
 
 			
@@ -585,4 +587,19 @@ public class ATMInterface {
 		}
 
 	}
+	class DrawListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+
+			try {
+				Draw();
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+
+	}
+
 }
