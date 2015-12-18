@@ -146,7 +146,7 @@ public class GUITerminal {
 											FrontOffice.cardInStoplistChecking(getCardNum(), "terminal");*/
 										//	FrontOffice.answerMessage(getCardNum(), getPin1(), (Converion.conv(getCurrType(), cur, getSum2())), "terminal");
 											
-											String s="";
+										/*	String s="";
 											int row = WorkWithExcel.findRowUser(getCardNum1());
 											double sum = Double.parseDouble(WorkWithExcel.getSum(row));
 											double newSum = 0;
@@ -154,8 +154,9 @@ public class GUITerminal {
 											if (getCurrType() != cur)
 											s=s+ Double.toString(Converion.conv(getCurrType(), getCurrType(), getSum2()));
 											else
-											s=getSum1();
-											String answ = FrontOffice.answerMessage(getCardNum1(), getPin1(),s, "terminal");
+											s=getSum1();*/
+											
+											String answ = FrontOffice.answerMessage(getCardNum1(), getPin1(),getSum1(), "terminal");
 											printCheck(answ, res);
 										}
 										else{
