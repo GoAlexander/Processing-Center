@@ -381,10 +381,8 @@ public class ATMInterface {
 			else 
 			{
 				textAreaResult.setText(null);
-				textAreaResult.append(FrontOffice.String answerMessage(inputNumberCard, input, money, "atm"));
+				textAreaResult.append(FrontOffice.answerMessage(inputNumberCard, input, money, "atm"));
 			}
-
-			
 		}
 	}
 
