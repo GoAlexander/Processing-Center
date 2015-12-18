@@ -151,7 +151,8 @@ public class GUITerminal {
 											printCheck(answ, res);
 										}
 										else{
-										res.setText("Транзакция не может быть совершена.");
+											printCheck1(res);
+									//	res.setText("Транзакция не может быть совершена.");
 									
 										//+финансовое подтверждение в Бэк-оффис
 										}
@@ -299,6 +300,13 @@ public class GUITerminal {
 	private void printCheck(String a, JTextArea b) {
 		if (transaction())
 			b.setText(a);
+	}
+	
+	private void printCheck1(JTextArea a) {
+		
+		if (transaction())
+			a.setText("Ваша транзакция на сумму " + sum.getText() + " " + val.getSelectedIndex()
+					+ " выполнена успешно\n");
 	}
 	public String getCurrency(){
 		return currency;
