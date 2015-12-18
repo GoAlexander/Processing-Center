@@ -215,5 +215,8 @@ public class WebsiteInterface extends javax.swing.JFrame {
                 }
             }
         });
+        cvvChecking(cardnumber, cvv);
+        usefulTimeOfCardChecking(cardnumber);
+        moneyOnCardChecking(cardnumber, s);
     }
 }
