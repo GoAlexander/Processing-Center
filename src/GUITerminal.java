@@ -151,7 +151,8 @@ public class GUITerminal {
 											printCheck(answ);
 										}
 										else{
-										printCheck(answ);
+										res.setText("Транзакция не может быть совершена.");
+									
 										//+финансовое подтверждение в Бэк-оффис
 										}
 								} else {
