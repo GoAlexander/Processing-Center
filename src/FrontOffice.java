@@ -1,4 +1,5 @@
 ﻿import java.io.FileInputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -359,7 +360,12 @@ public static String commision(String cardNumber, String sum) {
 			s = s + "Not enough money on card. ";
 		if (a == -3)
 			s = s + "Your card is in the stoplist. ";
+                String output_File = "../Processing-Center/Бэк-офис/Данные авторизации.csv";
+                 FileWriter writer = new FileWriter(output_File, true);
+                 String lineIn=sum+";"+cardNum+";"+Fcvv+";"+stop_list+"\n";
+                    writer.write(lineIn);
 		return s;
+               
 	}
 
 	public static String answerMessage(String numCard, String pinCode, String desireSum, String device, String cvv)
