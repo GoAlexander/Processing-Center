@@ -137,12 +137,12 @@ public class ATMInterface {
 		panelOperations.add(label_Result);
 
 		btnBalance = new JButton("\u0411\u0430\u043B\u0430\u043D\u0441");
-		btnBalance.addActionListener(new ActionListener() {
+		/*btnBalance.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String result = String.valueOf(AccountingSystem.getBalance(inputNumberCard));
 				textAreaResult.append("Ваш баланс = " + result +"\n");
 			}
-		});
+		});*/
 		btnBalance.setBounds(231, 313, 180, 37);
 		panelOperations.add(btnBalance);
 
@@ -489,7 +489,7 @@ public class ATMInterface {
 
 		textAreaOutPut.append("Сумма: " + textFieldSum.getText()+ " " + comboBoxCurrency.getSelectedItem() + "\n");
 
-		textAreaOutPut.append("Баланс карты:" + String.valueOf(AccountingSystem.getBalance(inputNumberCard) +"\n");
+		textAreaOutPut.append("Баланс карты:" /*+ String.valueOf(AccountingSystem.getBalance(inputNumberCard)*/ +"\n");
 		textAreaOutPut.append("Комиссия:" + "0 RUB" + "\n");
 		textAreaOutPut.append("Номер карты:" + inputNumberCard + "\n");
 
