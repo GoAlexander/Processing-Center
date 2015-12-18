@@ -49,11 +49,11 @@ public class ATMInterface {
 	public  JPasswordField passwordField;
 	public  JButton enterButton, clearButton, zeroButton, buttonSuccess;
 
-	public JButton btnDrawOperation, btnCashOperation, btnBalance, buttonClear;
+	public JButton btnCashOperation, btnBalance, buttonClear;
 
 	public  String inputNumberCard = ""; // номер карты
 	public  String input = "";// пин-код
-	public  String[] valString = { "RUB", "EUR", "USD", "GBP" };
+	public  String[] valString = { "RUB", "EUR", "USD"};
 
 	public  JScrollPane scrollPaneInform, scrollPaneResult;
 	public JTextArea textAreaOut, textAreaOutPut, textAreaResult;
@@ -99,7 +99,7 @@ public class ATMInterface {
 		MainATM = new JFrame();
 		MainATM.setModalExclusionType(ModalExclusionType.APPLICATION_EXCLUDE);
 		MainATM.setTitle("\u0411\u0430\u043D\u043A\u043E\u043C\u0430\u0442 \u21161");
-		MainATM.setBounds(100, 100, 437, 433);
+		MainATM.setBounds(100, 100, 437, 448);
 		MainATM.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		MainATM.getContentPane().setLayout(null);
 
@@ -117,7 +117,7 @@ public class ATMInterface {
 		// scrollPaneInform.setRowHeaderView(textAreaOutPut);
 
 		scrollPaneInform = new JScrollPane(textAreaOutPut);
-		scrollPaneInform.setBounds(25, 27, 180, 219);
+		scrollPaneInform.setBounds(25, 27, 180, 263);
 		panelOperations.add(scrollPaneInform);
 		// panelOperations.add(label);
 
@@ -126,32 +126,31 @@ public class ATMInterface {
 		panelOperations.add(textFieldSum);
 		textFieldSum.setColumns(10);
 
-		btnDrawOperation = new JButton(
-				"\u0421\u043D\u044F\u0442\u0438\u0435 \u043D\u0430\u043B\u0438\u0447\u043D\u044B\u0445");
-		btnDrawOperation.setBounds(25, 270, 175, 37);
-
-		panelOperations.add(btnDrawOperation);
-		btnDrawOperation.addActionListener(new DrawListener());
-
 		btnCashOperation = new JButton(
 				"\u0412\u043D\u0435\u0441\u0435\u043D\u0438\u0435 \u043D\u0430\u043B\u0438\u0447\u043D\u044B\u0445");
-		btnCashOperation.setBounds(25, 326, 180, 37);
+		btnCashOperation.setBounds(25, 313, 180, 37);
 		panelOperations.add(btnCashOperation);
 		btnCashOperation.addActionListener(new CashListener());
 
 		JLabel label_Result = new JLabel("\u0420\u0435\u0437\u0443\u043B\u044C\u0442\u0430\u0442:");
-		label_Result.setBounds(227, 152, 135, 14);
+		label_Result.setBounds(225, 139, 135, 14);
 		panelOperations.add(label_Result);
 
 		btnBalance = new JButton("\u0411\u0430\u043B\u0430\u043D\u0441");
-		btnBalance.setBounds(234, 326, 180, 37);
+		btnBalance.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String result = String.valueOf(AccountingSystem.getBalance(inputNumberCard));
+				textAreaResult.append("Ваш баланс = " + result +"\n");
+			}
+		});
+		btnBalance.setBounds(231, 313, 180, 37);
 		panelOperations.add(btnBalance);
 
 		textAreaResult = new JTextArea();
 		textAreaResult.setEditable(false);
 
 		scrollPaneResult = new JScrollPane(textAreaResult);
-		scrollPaneResult.setBounds(227, 177, 184, 69);
+		scrollPaneResult.setBounds(225, 164, 184, 126);
 		panelOperations.add(scrollPaneResult);
 
 		JLabel label_Sum = new JLabel("\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0441\u0443\u043C\u043C\u0443:");
@@ -170,9 +169,18 @@ public class ATMInterface {
 		JLabel lblNewLabelCurrency = new JLabel("\u0412\u0430\u043B\u044E\u0442\u0430:");
 		lblNewLabelCurrency.setBounds(227, 103, 95, 14);
 		panelOperations.add(lblNewLabelCurrency);
+		
+		JButton buttonExit = new JButton("\u0412\u044B\u0445\u043E\u0434");
+		buttonExit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				MainATM.setVisible(false);
+			}
+		});
+		buttonExit.setBounds(322, 370, 89, 28);
+		panelOperations.add(buttonExit);
 
 		panelAuthorisation = new JPanel();
-		panelAuthorisation.setBounds(0, 0, 421, 405);
+		panelAuthorisation.setBounds(0, 0, 421, 418);
 		MainATM.getContentPane().add(panelAuthorisation);
 		panelAuthorisation.setLayout(null);
 
@@ -360,12 +368,27 @@ public class ATMInterface {
 	private void Draw() throws SQLException, Exception {
 		if (isValidDraw()) {
 			String money = textFieldSum.getText();
-
+			int convMoney;
+		
+			if (comboBoxCurrency.getSelectedItem() == "EUR")
+			{
+				convMoney = Converion.convInt(2, Integer.parseInt(money));
+	            money = String.valueOf(convMoney);
+				
+			}
+			else if (comboBoxCurrency.getSelectedItem() == "USD")
+			{
+				convMoney = Converion.convInt(1, Integer.parseInt(money));	
+				money = String.valueOf(convMoney);
+				
+			}
 			
 			if(FrontOffice.transactionControl(inputNumberCard, input, money, "atm") == 1)
 			{
+				
+				
 			textAreaResult.setText(null);
-			//textAreaResult.append(/*FrontOffice.String answerMessage(inputNumberCard, input, money, "atm")*/);
+			textAreaResult.append(FrontOffice.String answerMessage(inputNumberCard, input, money, "atm"));
 			
 			textAreaResult.append("Вы сняли наличные в размере:" + money + " " + comboBoxCurrency.getSelectedItem() + "\n");
 		 
@@ -381,8 +404,10 @@ public class ATMInterface {
 			else 
 			{
 				textAreaResult.setText(null);
-				textAreaResult.append(FrontOffice.answerMessage(inputNumberCard, input, money, "atm"));
+				textAreaResult.append(FrontOffice.String answerMessage(inputNumberCard, input, money, "atm"));
 			}
+
+			
 		}
 	}
 
@@ -464,7 +489,7 @@ public class ATMInterface {
 
 		textAreaOutPut.append("Сумма: " + textFieldSum.getText()+ " " + comboBoxCurrency.getSelectedItem() + "\n");
 
-		textAreaOutPut.append("Баланс карты:" + "\n");
+		textAreaOutPut.append("Баланс карты:" + String.valueOf(AccountingSystem.getBalance(inputNumberCard) +"\n");
 		textAreaOutPut.append("Комиссия:" + "0 RUB" + "\n");
 		textAreaOutPut.append("Номер карты:" + inputNumberCard + "\n");
 
@@ -472,16 +497,6 @@ public class ATMInterface {
 
 		textAreaOutPut.append("***СПАСИБО!***");
 
-		System.out.println("ОАО <Банк>");
-		System.out.println("Выдача наличных");
-		// System.out.println(""); Дата Время????
-		System.out.println("Сумма:");
-		System.out.println("Баланс карты:");
-		System.out.println("Комиссия:" + "0 RUB");
-		System.out.println("Номер карты:" + inputNumberCard);// добавить номер карты
-		System.out.println("Банкомат: " + "№" + ATMNumber);
-		System.out.println("Код авторизации:");
-		System.out.println("СПАСИБО!");
 	}
 
 	class ClearListener implements ActionListener {
@@ -549,21 +564,6 @@ public class ATMInterface {
 				System.out.print("Error");
 			}
 
-		}
-
-	}
-
-	class DrawListener implements ActionListener {
-
-		@Override
-		public void actionPerformed(ActionEvent e) {
-
-			try {
-				Draw();
-			} catch (Exception e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
 		}
 
 	}
