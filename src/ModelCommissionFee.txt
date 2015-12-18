@@ -1,1 +1,6 @@
-001;комиссия_клиентов
+
+public class ModelCommissionFee {
+String codeModelCommissionFee;
+String descriptionModel;
+
+}

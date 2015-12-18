@@ -14,7 +14,7 @@ public class Comission {
 		try {
                        
 			FileInputStream fin = new FileInputStream(
-					"../ProcCenter/src/DiapasonCard.txt");
+					"../ProcCenter/src/DiapasonCardM.txt");
 
 			BufferedReader br = new BufferedReader(new InputStreamReader(fin));
 
@@ -54,7 +54,7 @@ public class Comission {
 		try {
 
 			FileInputStream fin = new FileInputStream(
-					"../ProcCenter/src/ModelCommissionFee.txt");
+					"../ProcCenter/src/ModelCommissionFeeM.txt");
 
 			BufferedReader br = new BufferedReader(new InputStreamReader(fin));
 
@@ -93,7 +93,7 @@ public class Comission {
 		try {
 
 			FileInputStream fin = new FileInputStream(
-					"../ProcCenter/src/ConfigurationCommissiomFee.txt");
+					"../ProcCenter/src/ConfigurationCommissiomFeeM.txt");
 
 			BufferedReader br = new BufferedReader(new InputStreamReader(fin));
 
@@ -151,7 +151,7 @@ public class Comission {
 		try {
 
 			FileInputStream fin = new FileInputStream(
-					"../ProcCenter/src/ModelDataCommision.txt");
+					"../ProcCenter/src/ModelDataCommisionM.txt");
 
 			BufferedReader br = new BufferedReader(new InputStreamReader(fin));
 
