@@ -34,7 +34,7 @@ public class FrontOffice {
 		public String toString() {
 			String s = new String();
 			for (int j = denomination.length - 1; j >= 0; j--)
-				s = s + ("Код банкомата: " + code[j] + "; купюр выдано: " + result[j] + '\n');
+				s = s + ("Номер кассеты: " + code[j] + "; купюр выдано: " + result[j] + '\n');
 			return s;
 		}
 	}
