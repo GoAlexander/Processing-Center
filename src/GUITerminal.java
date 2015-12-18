@@ -308,13 +308,13 @@ public class GUITerminal {
 	}
 
 	private void printCheck(String a, JTextArea b) {
-		if (transaction())
+	//	if (transaction())
 			b.setText(a);
 	}
 	
 	private void printCheck1(JTextArea a) {
 		
-		if (transaction())
+	//	if (transaction())
 			a.setText("Ваша транзакция на сумму " + sum.getText() + " " + val.getSelectedIndex()
 					+ " выполнена успешно\n");
 	}
