@@ -52,13 +52,14 @@ public class FrontOffice {
 	//methods
 	//Расчёт комиссии (task #6) (+Backoffice!)
 public static String commision(String cardNumber, String sum) {
-		double com = 0;
+		int com = 0;
                 int min;
                 int max;
                 int percentage;
                 String cardN = cardNumber + "";
 		String cardNumb = cardN.substring(6, 9);
                 int diapasonCard = Integer.parseInt(cardNumb);
+                int sum = Integer.parseInt(sum);
                 if(diapasonCard >=1000 && diapasonCard <= 3000)
                  {  
                   percentage=1;
