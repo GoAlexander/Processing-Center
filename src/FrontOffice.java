@@ -50,7 +50,7 @@ public class FrontOffice {
 	
 	//methods
 	//Расчёт комиссии (task #6) (+Backoffice!)
-public static string commision(string cardNumber, string sum,) {
+public static String commision(String cardNumber, String sum) {
 		double com = 0;
                 int min;
                 int max;
@@ -74,25 +74,25 @@ public static string commision(string cardNumber, string sum,) {
                   {
                     percentage=3;
                     min=0;
-                    max==0;
+                    max=0;
                   }
                  if(diapasonCard >=7001 && diapasonCard <= 9000)
                   {
                     percentage=4;
                     min=12;
-                    max==100;
+                    max=100;
                   }
                  if(diapasonCard >=9001 && diapasonCard <= 9999)
                   {
                     percentage=5;
-                    min==10;
-                    max==100;
+                    min=10;
+                    max=100;
                   }
 		if (min == 0 && max == 0) {
-			com = sum * (percent * 0.01);
+			com = sum * (percentage * 0.01);
 		}
 		if (min == 0 && max != 0) {
-			com = sum * (percent * 0.01);
+			com = sum * (percentage * 0.01);
 			if (com < max) {
 				com=com;
 			} else {
@@ -100,7 +100,7 @@ public static string commision(string cardNumber, string sum,) {
 			}
 		}
 		if (min != 0 && max == 0) {
-			com = sum * (percent * 0.01);
+			com = sum * (percentage * 0.01);
 			if (com < min) {
 				com=min;
 			} else {
@@ -109,7 +109,7 @@ public static string commision(string cardNumber, string sum,) {
 		}
 
 		if (min != 0 && max != 0) {
-			com = sum * (percent * 0.01);
+			com = sum * (percentage * 0.01);
 			if (min < com && com < max) {
 				com=com;
 			} else {
