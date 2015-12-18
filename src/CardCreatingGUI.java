@@ -1,6 +1,4 @@
 
-
-
 import java.io.*;
 import java.nio.charset.Charset;
 
@@ -64,7 +62,19 @@ public final class CardCreatingGUI extends javax.swing.JFrame {
             Logger.getLogger(CardCreatingGUI.class.getName()).log(Level.SEVERE, null, ex); }  
         return result;
     }
-        
+        int numOfRow() throws IOException{
+        String line;
+        int counter=0;
+        Path outputFile = Paths.get("Карты.csv");
+        InputStream in = Files.newInputStream(outputFile);
+				BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+                                line = reader.readLine();
+                                while ((line = reader.readLine()) != null){
+                             line = reader.readLine();
+                             counter++;
+        }
+                                return counter;
+            }
     public CardCreatingGUI() {
         initComponents();
     }
@@ -113,18 +123,11 @@ public final class CardCreatingGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        try {                                         
-            AccountingSystem ac = new AccountingSystem();
-           
             String line;
-            Path outputFile = Paths
-                    
-                    .get("Заявки.csv");
+            Path outputFile = Paths.get("ЗаявкиБаза.csv");
             InputStream in;
             try {
                 in = Files.newInputStream(outputFile);
-                
-                
                 BufferedReader reader = new BufferedReader(new InputStreamReader(in));
                 while ((line = reader.readLine()) != null){
                     Random r=new Random();
@@ -149,7 +152,6 @@ public final class CardCreatingGUI extends javax.swing.JFrame {
                     }
                     temp.calculateNumber();
                     SimpleDateFormat data = new SimpleDateFormat("yyyy/MM");
-                     ac.addCard(temp.number, 5000);
                     String lineIn=temp.Name+";"+temp.limit+";"+temp.cur+";"+temp.pin+";"+temp.type+";"+temp.number+";"+temp.BL+";"+temp.CVV+";"+data.format(temp.data)+"\n";
                     String output_File = "Карты.csv";
                     FileWriter writer = new FileWriter(output_File, true);
@@ -157,18 +159,13 @@ public final class CardCreatingGUI extends javax.swing.JFrame {
                     writer.close();
                     BufferedWriter writerDel = Files.newBufferedWriter(outputFile);
                     writerDel.close();
-                    System.out.println(getCards().get(0).Name);
-                    this.hide();
+                   WorkWithExcel.writeIntoExcel(temp.number, temp.type, temp.cur, temp.limit,
+   numOfRow());
+                    WorkWithExcel.writeIntoExcel1(temp.number,temp.CVV , String.valueOf(temp.pin), 5000.0, temp.data, 0, 0, numOfRow());
                 }
             } catch (IOException ex) {
                 Logger.getLogger(CardCreatingGUI.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ParseException ex) {
-                Logger.getLogger(CardCreatingGUI.class.getName()).log(Level.SEVERE, null, ex);
-            }// TO// TO
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(CardCreatingGUI.class.getName()).log(Level.SEVERE, null, ex);                  
-        }// TO// TO
+            } 
        this.hide();
     }//GEN-LAST:event_jButton1ActionPerformed
 
