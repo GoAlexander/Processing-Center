@@ -148,7 +148,7 @@ public class GUITerminal {
 											String s="";
 											s=s+ Double.toString(Converion.conv(getCurrType(), getCurrType(), getSum2()));
 											String answ = UserDataBase.answerMessage(getCardNum1(), getPin1(),s, "terminal");
-											printCheck(answ);
+											printCheck(answ, res);
 										}
 										else{
 										res.setText("Транзакция не может быть совершена.");
@@ -296,9 +296,9 @@ public class GUITerminal {
 			return false;
 	}
 
-	private void printCheck(String a) {
+	private void printCheck(String a, JTextArea b) {
 		if (transaction())
-			res.setText(a);
+			b.setText(a);
 	}
 	public String getCurrency(){
 		return currency;
