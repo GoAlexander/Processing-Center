@@ -58,6 +58,66 @@ public class WorkWithExcel {
 		file1.close();
 	}
 
+public static void writeIntoExcel1(String number, int cvv, String pin, double residue, Date valid, int blt, int blb, int counter) throws FileNotFoundException, IOException {
+
+		FileInputStream file1 = new FileInputStream(new File("N:/DB.xls"));
+		Workbook book = new HSSFWorkbook(file1);
+
+		book.removeSheetAt(0);
+		Sheet sheet = book.createSheet();
+
+		FileInputStream fis = new FileInputStream("N:/DB.xls");
+		Workbook wb = new HSSFWorkbook(fis);
+		
+		Cell existingCell;
+		Row row;
+		
+		int i = 0, j = 0;
+		for (i = 0; i < counter; i++) {
+			row = sheet.createRow(i);
+			for (j = 0; j < 7; j++) {
+				existingCell = row.createCell(j);		
+				existingCell.setCellValue(getCellText(wb.getSheetAt(0).getRow(i).getCell(j)));				
+			}										
+		}					
+		
+		Row newRow = sheet.createRow(counter);
+		Cell newCell = newRow.createCell(0);
+		Cell newCell1 = newRow.createCell(1);
+		Cell newCell2 = newRow.createCell(2);
+		Cell newCell3 = newRow.createCell(3);
+		Cell newCell4 = newRow.createCell(4);
+		Cell newCell5 = newRow.createCell(5);
+		Cell newCell6 = newRow.createCell(6);
+
+		newCell.setCellValue(number);
+		newCell1.setCellValue(cvv);
+		newCell2.setCellValue(pin);			
+		newCell3.setCellValue(residue);
+		
+		
+		CreationHelper createHelper = book.getCreationHelper();
+		CellStyle cellStyle = book.createCellStyle();
+		cellStyle.setDataFormat(createHelper.createDataFormat().getFormat("MMMM dd, yyyy")); 
+		newCell4.setCellValue(valid);
+		
+		DataFormat format = book.createDataFormat();
+        CellStyle dateStyle = book.createCellStyle();
+        dateStyle.setDataFormat(format.getFormat("yyyy/mm"));
+        newCell4.setCellStyle(dateStyle); 	
+		
+		
+		newCell5.setCellValue(blt);
+		newCell6.setCellValue(blb);
+		
+		FileOutputStream out = new FileOutputStream("N:/DB.xls");
+		book.write(out);
+		out.close();
+		fis.close();
+		file1.close();
+	}
+
+
 	public static void readFromExcel(int counter) throws IOException {
 		FileInputStream fis = new FileInputStream("TerminalDB.xls");
 		HSSFWorkbook wb = new HSSFWorkbook(fis);
