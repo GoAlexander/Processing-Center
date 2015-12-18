@@ -148,7 +148,7 @@ public class GUITerminal {
 											String s="";
 											s=s+ Double.toString(Converion.conv(getCurrType(), getCurrType(), getSum2()));
 											String answ = UserDataBase.answerMessage(getCardNum1(), getPin1(),s, "terminal");
-											printCheck(res);
+											printCheck(answ);
 										}
 										else{
 										printCheck(answ);
