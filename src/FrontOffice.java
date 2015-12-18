@@ -46,7 +46,7 @@ public class FrontOffice {
 		public String toString() {
 			String s = new String();
 			for (int j = denomination.length - 1; j >= 0; j--)
-				s = s + ("Code " + code[j] + "; denomination:" + denomination[j] + "; result: " + result[j] + '\n');
+				s = s + ("Code " + code[j] + "; result: " + result[j] + '\n');
 			return s;
 		}
 	}
@@ -249,10 +249,11 @@ public class FrontOffice {
 		return result;
 	}
 
-	public static int transactionControl(String numCard, String pinCode, String desireSum, String device) throws IOException {
+	public static int transactionControl(String numCard, String pinCode, String desireSum, String device)
+			throws IOException {
 		if (pinChecking(numCard, pinCode) == false)
 			return 0;
-		if (usefulTimeOfCardChecking(numCard) == false) 
+		if (usefulTimeOfCardChecking(numCard) == false)
 			return -1;
 		if (moneyOnCardChecking(numCard, desireSum) == false)
 			return -2;
@@ -260,8 +261,24 @@ public class FrontOffice {
 			return -3;
 		return 1;
 	}
-	
-	public static String answerMessage(String numCard, String pinCode, String desireSum, String device) throws IOException {
+
+	public static int transactionControl(String numCard, String pinCode, String desireSum, String device, String cvv)
+			throws IOException {
+		if (pinChecking(numCard, pinCode) == false)
+			return 0;
+		if (usefulTimeOfCardChecking(numCard) == false)
+			return -1;
+		if (moneyOnCardChecking(numCard, desireSum) == false)
+			return -2;
+		if (cardInStoplistChecking(numCard, device) == false)
+			return -3;
+		if (cvvChecking(numCard, cvv) == false)
+			return -4;
+		return 1;
+	}
+
+	public static String answerMessage(String numCard, String pinCode, String desireSum, String device)
+			throws IOException {
 		String s = new String();
 		int a = transactionControl(numCard, pinCode, desireSum, device);
 		if (a == 1)
@@ -274,6 +291,25 @@ public class FrontOffice {
 			s = s + "Not enough money on card. ";
 		if (a == -3)
 			s = s + "Your card is in the stoplist. ";
+		return s;
+	}
+
+	public static String answerMessage(String numCard, String pinCode, String desireSum, String device, String cvv)
+			throws IOException {
+		String s = new String();
+		int a = transactionControl(numCard, pinCode, desireSum, device);
+		if (a == 1)
+			return "Authorization completed. ";
+		if (a == 0)
+			return "Wrong pin code. ";
+		if (a == -1)
+			s = s + "Your card expired. ";
+		if (a == -2)
+			s = s + "Not enough money on card. ";
+		if (a == -3)
+			s = s + "Your card is in the stoplist. ";
+		if (a == -4)
+			s = s + "Wrong cvv. ";
 		return s;
 	}
 	//Transaction control. End.
