@@ -147,7 +147,7 @@ public class GUITerminal {
 										//	FrontOffice.answerMessage(getCardNum(), getPin1(), (Converion.conv(getCurrType(), cur, getSum2())), "terminal");
 											String s="";
 											s=s+ Double.toString(Converion.conv(getCurrType(), getCurrType(), getSum2()));
-											String answ = UserDataBase.answerMessage(getCardNum1(), getPin1(),s, "terminal");
+											String answ = FrontOffice.answerMessage(getCardNum1(), getPin1(),s, "terminal");
 											printCheck(answ, res);
 										}
 										else{
