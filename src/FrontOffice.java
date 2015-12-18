@@ -12,9 +12,8 @@ public class FrontOffice {
 
 	double sum; //Количество денег (к примеру 1000)
 	int type_of_money; //валюта
-	String numCard;
-	String pinCode;
-	int cvv;
+	String cardNum;
+	int Fcvv;
 	boolean stop_list;
 	
 	//Купюры
@@ -102,6 +101,7 @@ public class FrontOffice {
 			int row = findRowUser(numCard);
 			int col = findColUser("CVV");
 			if (cvv.equals(getCellText(wb.getSheetAt(0).getRow(row).getCell(col)))) {
+				Fcvv = Integer.parseInt(cvv);
 				fis.close();
 				return true;
 			} else {
@@ -121,8 +121,10 @@ public class FrontOffice {
 			int col = findColUser("Пин код");
 			if (pinCode.equals(getCellText(wb.getSheetAt(0).getRow(row).getCell(col)))) {
 				fis.close();
+				 cardNum = numCard;
 				return true;
 			} else {
+				cardNum = numCard;
 				fis.close();
 				return false;
 			}
@@ -180,9 +182,11 @@ public class FrontOffice {
 			Integer desSum = Integer.valueOf(desireSum);
 			Integer factSum = (int) wb.getSheetAt(0).getRow(row).getCell(col).getNumericCellValue();
 			if ((desSum.compareTo(factSum) == -1) || (desSum.compareTo(factSum) == 0)) {
+				sum = Double.parseDouble(desireSum);
 				fis.close();
 				return true;
 			} else {
+				sum = Double.parseDouble(desireSum);
 				fis.close();
 				return false;
 			}
