@@ -309,14 +309,14 @@ public class GUITerminal {
 
 	private void printCheck(String a, JTextArea b) {
 	//	if (transaction())
-			b.setText(a);
+			b.append(a+"\n");
 	}
 	
 	private void printCheck1(JTextArea a) {
 		
 	//	if (transaction())
-			a.setText("Ваша транзакция на сумму " + sum.getText() + " " + val.getSelectedIndex()
-					+ " выполнена успешно\n");
+			a.append("Ваша транзакция на сумму " + sum.getText() + " " + val.getSelectedIndex()
+					+ " выполнена успешно\n"+"\n");
 	}
 	public String getCurrency(){
 		return currency;
