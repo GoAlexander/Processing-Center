@@ -124,7 +124,7 @@ public final class CardCreatingGUI extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
             String line;
-            Path outputFile = Paths.get("ЗаявкиБаза.csv");
+            Path outputFile = Paths.get("Заявки.csv");
             InputStream in;
             try {
                 in = Files.newInputStream(outputFile);

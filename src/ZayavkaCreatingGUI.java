@@ -243,16 +243,21 @@ public static String toTranslit(String src) throws Exception
       return res.toString();
 }
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
+ String line;
         try {      
              jTextArea1.setText("");
+              if(jTextField2.getText().length()==0)
+                  line=toTranslit(jTextField1.getText())+";"+0+";"+jComboBox1.getSelectedIndex()+";"+jComboBox2.getSelectedIndex()+"\n";
+              else{
             for(int i=0;i<jTextField2.getText().length();i++)
+               
                 if(Character.isDigit(jTextField2.getText().charAt(i))){}
                 else {
                      throw new Exception("Недопустимый ввод в поле\nЛимит выдачи");       
                 }
                       
-                        String line=toTranslit(jTextField1.getText())+";"+Integer.parseInt(jTextField2.getText())+";"+jComboBox1.getSelectedIndex()+";"+jComboBox2.getSelectedIndex()+"\n";
+                        line=toTranslit(jTextField1.getText())+";"+Integer.parseInt(jTextField2.getText())+";"+jComboBox1.getSelectedIndex()+";"+jComboBox2.getSelectedIndex()+"\n";
+              }
                        String outputFile = "Заявки.csv";
 			FileWriter writer = new FileWriter(outputFile, true);
                         writer.write(line);
